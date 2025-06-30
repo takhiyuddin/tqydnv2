@@ -357,12 +357,12 @@ const Portfolio = () => {
                     </div>
                   </div>
                   
-                  {/* Floating Type Badge with Better Spacing */}
-                  <div className="absolute top-4 right-4 transform translate-x-12 group-hover:translate-x-0 transition-transform duration-300 delay-100">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md shadow-lg ${
+                  {/* Floating Type Badge */}
+                  <div className="absolute top-4 right-4 transform translate-x-8 group-hover:translate-x-0 transition-transform duration-300">
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md ${
                       project.type === 'video' 
-                        ? 'bg-red-500/90 text-white' 
-                        : 'bg-blue-500/90 text-white'
+                        ? 'bg-red-500/80 text-white' 
+                        : 'bg-blue-500/80 text-white'
                     }`}>
                       {project.type === 'video' ? 'Video' : 'Web'}
                     </span>
