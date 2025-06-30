@@ -436,60 +436,62 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Enhanced Blog-Style Pop-up */}
+      {/* Responsive Blog-Style Modal */}
       {isPopupOpen && selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white rounded-2xl max-w-5xl w-full max-h-[95vh] shadow-2xl animate-scale-in transform overflow-hidden">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 animate-fade-in">
+          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-5xl max-h-[98vh] sm:max-h-[95vh] shadow-2xl animate-scale-in transform overflow-hidden">
             {/* Reading Progress Bar */}
             <div className="absolute top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out z-10"
                  style={{ width: `${readingProgress}%` }}></div>
             
-            {/* Enhanced Header */}
-            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-6 z-10">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4 animate-slide-in-left">
-                  <div className="relative">
-                    <div className="p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl shadow-sm animate-pulse-subtle">
-                      {selectedProject.type === 'video' ? <Play size={24} className="text-slate-700" /> : <Globe size={24} className="text-slate-700" />}
+            {/* Responsive Header */}
+            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-4 sm:p-6 z-10">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="relative flex-shrink-0">
+                      <div className="p-2 sm:p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg shadow-sm">
+                        {selectedProject.type === 'video' ? <Play size={20} className="text-slate-700" /> : <Globe size={20} className="text-slate-700" />}
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                     </div>
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
-                  </div>
-                  <div>
-                    <h2 className="text-2xl font-bold text-slate-900 mb-1 animate-fade-in-delayed">
-                      {selectedProject.title}
-                    </h2>
-                    <div className="flex items-center gap-6 text-sm text-slate-500 animate-fade-in-delayed-2">
-                      <div className="flex items-center gap-2">
-                        <Calendar size={14} />
-                        <span>{selectedProject.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <User size={14} />
-                        <span>{selectedProject.role}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock size={14} />
-                        <span>5 min read</span>
+                    <div className="min-w-0 flex-1">
+                      <h2 className="text-lg sm:text-2xl font-bold text-slate-900 mb-1 truncate">
+                        {selectedProject.title}
+                      </h2>
+                      <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-slate-500">
+                        <div className="flex items-center gap-1">
+                          <Calendar size={12} />
+                          <span>{selectedProject.date}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <User size={12} />
+                          <span className="truncate">{selectedProject.role}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock size={12} />
+                          <span>5 min read</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={handleCloseBlog}
-                  className="p-3 hover:bg-slate-100 rounded-xl transition-all duration-200 hover:rotate-90 transform group"
+                  className="flex-shrink-0 p-2 sm:p-3 hover:bg-slate-100 rounded-lg transition-all duration-200 hover:rotate-90 transform group"
                 >
-                  <X size={24} className="group-hover:text-red-500 transition-colors" />
+                  <X size={20} className="group-hover:text-red-500 transition-colors" />
                 </button>
               </div>
             </div>
 
             {/* Scrollable Content */}
-            <div className="blog-modal-content overflow-y-auto max-h-[calc(95vh-120px)]">
-              <div className="p-8 space-y-10">
+            <div className="blog-modal-content overflow-y-auto max-h-[calc(98vh-100px)] sm:max-h-[calc(95vh-120px)]">
+              <div className="p-4 sm:p-8 space-y-6 sm:space-y-10">
                 {/* Hero Section */}
                 <div className="animate-scale-in-delayed">
                   {selectedProject.type === 'video' && selectedProject.youtubeId ? (
-                    <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-2xl group">
+                    <div className="relative aspect-video w-full rounded-lg sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl group">
                       <iframe
                         className="w-full h-full"
                         src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
@@ -497,161 +499,156 @@ const Portfolio = () => {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                   ) : (
                     <div className="relative">
                       <img
                         src={selectedProject.image}
                         alt={selectedProject.title}
-                        className="w-full h-80 object-cover rounded-2xl shadow-2xl"
+                        className="w-full h-48 sm:h-80 object-cover rounded-lg sm:rounded-2xl shadow-lg sm:shadow-2xl"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-2xl"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-lg sm:rounded-2xl"></div>
                     </div>
                   )}
                 </div>
 
-                {/* Enhanced Tags */}
-                <div className="flex flex-wrap gap-3 animate-fade-in-delayed">
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 sm:gap-3 animate-fade-in-delayed">
                   {selectedProject.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="group flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full text-sm font-medium hover:from-slate-200 hover:to-slate-300 hover:scale-105 transition-all duration-300 cursor-default animate-bounce-in shadow-sm"
-                      style={{ animationDelay: `${index * 0.1}s` }}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full text-xs sm:text-sm font-medium hover:from-slate-200 hover:to-slate-300 transition-all duration-300 cursor-default shadow-sm"
                     >
-                      <Tag size={14} className="group-hover:rotate-12 transition-transform duration-200" />
+                      <Tag size={12} />
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                {/* Blog Content with Enhanced Styling */}
+                {/* Blog Content */}
                 <article className="prose prose-slate max-w-none">
                   {[
                     { 
                       title: 'Project Overview', 
                       content: selectedProject.blogContent.overview,
-                      icon: <Globe size={20} />,
+                      icon: <Globe size={18} />,
                       gradient: 'from-blue-500 to-cyan-500'
                     },
                     { 
                       title: 'The Challenge', 
                       content: selectedProject.blogContent.challenge,
-                      icon: <Award size={20} />,
+                      icon: <Award size={18} />,
                       gradient: 'from-orange-500 to-red-500'
                     },
                     { 
                       title: 'The Solution', 
                       content: selectedProject.blogContent.solution,
-                      icon: <ArrowRight size={20} />,
+                      icon: <ArrowRight size={18} />,
                       gradient: 'from-green-500 to-emerald-500'
                     }
                   ].map((section, index) => (
-                    <section key={index} className="mb-10 animate-slide-up group" style={{ animationDelay: `${index * 0.2}s` }}>
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className={`p-3 bg-gradient-to-r ${section.gradient} rounded-xl text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <section key={index} className="mb-6 sm:mb-10">
+                      <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                        <div className={`p-2 sm:p-3 bg-gradient-to-r ${section.gradient} rounded-lg text-white shadow-lg`}>
                           {section.icon}
                         </div>
-                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors duration-300">
+                        <h3 className="text-lg sm:text-2xl font-bold text-slate-900">
                           {section.title}
                         </h3>
                       </div>
-                      <div className="bg-gradient-to-r from-slate-50 to-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-                        <p className="text-slate-700 leading-relaxed text-lg">{section.content}</p>
+                      <div className="bg-gradient-to-r from-slate-50 to-white p-4 sm:p-6 rounded-lg border border-slate-200 shadow-sm">
+                        <p className="text-slate-700 leading-relaxed text-sm sm:text-lg">{section.content}</p>
                       </div>
                     </section>
                   ))}
 
-                  {/* Enhanced Features Section */}
-                  <section className="mb-10 animate-slide-up" style={{ animationDelay: '0.6s' }}>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white shadow-lg">
-                        <Award size={20} />
+                  {/* Features Section */}
+                  <section className="mb-6 sm:mb-10">
+                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                      <div className="p-2 sm:p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white shadow-lg">
+                        <Award size={18} />
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900">Key Features</h3>
+                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Key Features</h3>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid gap-3 sm:gap-4">
                       {selectedProject.blogContent.features.map((feature, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-3 p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-300 hover:shadow-md transition-all duration-300 animate-slide-in-left group"
-                          style={{ animationDelay: `${0.8 + index * 0.1}s` }}
+                          className="flex items-start gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
-                          <span className="text-slate-700 leading-relaxed group-hover:text-slate-900 transition-colors duration-300">{feature}</span>
+                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed text-sm sm:text-base">{feature}</span>
                         </div>
                       ))}
                     </div>
                   </section>
 
-                  {/* Enhanced Technologies Section */}
-                  <section className="mb-10 animate-slide-up" style={{ animationDelay: '1.2s' }}>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-3 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-xl text-white shadow-lg">
-                        <Tag size={20} />
+                  {/* Technologies Section */}
+                  <section className="mb-6 sm:mb-10">
+                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                      <div className="p-2 sm:p-3 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg text-white shadow-lg">
+                        <Tag size={18} />
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900">Technologies Used</h3>
+                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Technologies Used</h3>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {selectedProject.blogContent.technologies.map((tech, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-4 p-4 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-xl hover:from-white hover:to-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-300 animate-slide-in-right group"
-                          style={{ animationDelay: `${1.4 + index * 0.1}s` }}
+                          className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-lg hover:from-white hover:to-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
-                          <span className="text-slate-700 leading-relaxed font-medium group-hover:text-slate-900 transition-colors duration-300">{tech}</span>
+                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed font-medium text-sm sm:text-base">{tech}</span>
                         </div>
                       ))}
                     </div>
                   </section>
 
-                  {/* Enhanced Outcome Section */}
-                  <section className="mb-10 animate-slide-up" style={{ animationDelay: '1.8s' }}>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl text-white shadow-lg">
-                        <Award size={20} />
+                  {/* Outcome Section */}
+                  <section className="mb-6 sm:mb-10">
+                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                      <div className="p-2 sm:p-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white shadow-lg">
+                        <Award size={18} />
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900">Outcome & Results</h3>
+                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Outcome & Results</h3>
                     </div>
-                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-6 rounded-xl border border-emerald-200 shadow-sm">
-                      <p className="text-slate-700 leading-relaxed text-lg">{selectedProject.blogContent.outcome}</p>
+                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-4 sm:p-6 rounded-lg border border-emerald-200 shadow-sm">
+                      <p className="text-slate-700 leading-relaxed text-sm sm:text-lg">{selectedProject.blogContent.outcome}</p>
                     </div>
                   </section>
 
-                  {/* Enhanced Lessons Section */}
-                  <section className="mb-10 animate-slide-up" style={{ animationDelay: '2s' }}>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl text-white shadow-lg">
-                        <Award size={20} />
+                  {/* Lessons Section */}
+                  <section className="mb-6 sm:mb-10">
+                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                      <div className="p-2 sm:p-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-white shadow-lg">
+                        <Award size={18} />
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900">Key Learnings</h3>
+                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Key Learnings</h3>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {selectedProject.blogContent.lessons.map((lesson, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl hover:from-orange-50 hover:to-amber-50 hover:shadow-md transition-all duration-300 animate-fade-in group"
-                          style={{ animationDelay: `${2.2 + index * 0.1}s` }}
+                          className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg hover:from-orange-50 hover:to-amber-50 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-2 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
-                          <span className="text-slate-700 leading-relaxed group-hover:text-slate-900 transition-colors duration-300">{lesson}</span>
+                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed text-sm sm:text-base">{lesson}</span>
                         </div>
                       ))}
                     </div>
                   </section>
                 </article>
 
-                {/* Enhanced Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-slate-200 animate-slide-up" style={{ animationDelay: '2.5s' }}>
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-slate-200">
                   {selectedProject.type === 'video' && selectedProject.youtubeId && (
                     <a
                       href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-red-700 hover:to-red-800 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group"
+                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:from-red-700 hover:to-red-800 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group text-sm sm:text-base"
                     >
-                      <Play size={20} className="group-hover:scale-110 transition-transform duration-200" />
+                      <Play size={18} className="group-hover:scale-110 transition-transform duration-200" />
                       Watch on YouTube
                     </a>
                   )}
@@ -660,17 +657,17 @@ const Portfolio = () => {
                       href={selectedProject.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white px-8 py-4 rounded-xl font-semibold hover:from-slate-800 hover:to-slate-700 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group"
+                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:from-slate-800 hover:to-slate-700 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group text-sm sm:text-base"
                     >
-                      <ExternalLink size={20} className="group-hover:scale-110 transition-transform duration-200" />
+                      <ExternalLink size={18} className="group-hover:scale-110 transition-transform duration-200" />
                       Visit Website
                     </a>
                   )}
                   <button
                     onClick={handleCloseBlog}
-                    className="flex items-center justify-center gap-3 border-2 border-slate-300 text-slate-700 px-8 py-4 rounded-xl font-semibold hover:border-slate-400 hover:bg-slate-50 hover:scale-105 transition-all duration-300 transform group"
+                    className="flex items-center justify-center gap-3 border-2 border-slate-300 text-slate-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:border-slate-400 hover:bg-slate-50 hover:scale-105 transition-all duration-300 transform group text-sm sm:text-base"
                   >
-                    <X size={20} className="group-hover:rotate-90 transition-transform duration-200" />
+                    <X size={18} className="group-hover:rotate-90 transition-transform duration-200" />
                     Close
                   </button>
                 </div>
@@ -734,96 +731,33 @@ const Portfolio = () => {
           left: 100%;
         }
 
-        @keyframes bounce-in {
-          0% {
-            opacity: 0;
-            transform: scale(0.3) translateY(20px);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.05);
-          }
-          70% {
-            transform: scale(0.9);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-
-        @keyframes slide-down {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes slide-in-left {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes pulse-subtle {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.8;
-          }
-        }
-
-        .animate-bounce-in {
-          animation: bounce-in 0.6s ease-out both;
-        }
-
-        .animate-slide-down {
-          animation: slide-down 0.5s ease-out;
-        }
-
-        .animate-slide-in-left {
-          animation: slide-in-left 0.6s ease-out;
-        }
-
-        .animate-pulse-subtle {
-          animation: pulse-subtle 2s ease-in-out infinite;
-        }
-
-        .animate-scale-in-delayed {
-          animation: scale-in 0.6s ease-out 0.3s both;
-        }
-
         .blog-modal-content {
           scrollbar-width: thin;
           scrollbar-color: #cbd5e1 #f8fafc;
         }
 
         .blog-modal-content::-webkit-scrollbar {
-          width: 6px;
+          width: 4px;
         }
 
         .blog-modal-content::-webkit-scrollbar-track {
           background: #f8fafc;
-          border-radius: 3px;
+          border-radius: 2px;
         }
 
         .blog-modal-content::-webkit-scrollbar-thumb {
           background: #cbd5e1;
-          border-radius: 3px;
+          border-radius: 2px;
         }
 
         .blog-modal-content::-webkit-scrollbar-thumb:hover {
           background: #94a3b8;
+        }
+
+        @media (max-width: 640px) {
+          .blog-modal-content::-webkit-scrollbar {
+            width: 2px;
+          }
         }
       `}</style>
     </section>
