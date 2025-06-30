@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Eye, X } from 'lucide-react';
 
+import ImgTaqiyuddin from '../assets/taqiyuddin.png';
+import ImgHealthy from '../assets/healthy.png';
+import ImgIris from '../assets/iris.png';
+import ImgAwal from '../assets/awal.png';
+import ImgAfiftaqiya from '../assets/afiftaqiya.com.png';
+import ImgP5 from '../assets/p5.jpg';
+
 type PreviewType = 'video' | 'image';
 
 interface Project {
@@ -61,17 +68,17 @@ const Portfolio = () => {
       type: 'web',
       title: 'Taqiyuddin Afif Portfolio v2.1',
       description: 'Developed from scratch using React, styled with Lucide icons, and powered by Vite for a fast, modular workflow.',
-      image: 'src/assets/taqiyuddin.png',
+      image: ImgTaqiyuddin,
       tags: ['React', 'Lucide', 'Vite'],
       previewType: 'image',
-      previewSrc: 'src/assets/taqiyuddin.png',
+      previewSrc: ImgTaqiyuddin,
       url: '#',
     },
     {
       type: 'video',
       title: 'Healthy School Project',
-      description: 'Edited a school awareness video focusing on smoking prevention, personal health, and environmental consciousness. The project combined visual clarity with a message-driven narrative.',
-      image: 'src/assets/healthy.png',
+      description: 'Edited a school awareness video focusing on smoking prevention, personal health, and environmental consciousness.',
+      image: ImgHealthy,
       tags: ['Premiere Pro', 'After Effects', 'Canva'],
       previewType: 'video',
       previewSrc: 'https://www.youtube.com/embed/8KLeB_ZF3eA',
@@ -79,8 +86,8 @@ const Portfolio = () => {
     {
       type: 'video',
       title: 'Short Film “Iris”',
-      description: 'A short film edited entirely using Adobe Premiere Pro, with soft color tones and cinematic transitions to emphasize the inner conflict of a schoolgirl who wants to pursue her hobby amid pressure from her parents.',
-      image: 'src/assets/iris.png',
+      description: 'A short film edited entirely using Adobe Premiere Pro, with soft color tones and cinematic transitions.',
+      image: ImgIris,
       tags: ['After Effects', 'Premiere Pro'],
       previewType: 'video',
       previewSrc: 'https://www.youtube.com/embed/eubpKqmfmII',
@@ -88,8 +95,8 @@ const Portfolio = () => {
     {
       type: 'video',
       title: 'Short Film “Awal”',
-      description: 'A socially driven short film with cinematic editing and a meaningful core. “Awal” was cut using Adobe Premiere Pro with dramatic color grading, soft transitions, and precise rhythm to emphasize the value of respecting all races without discrimination.',
-      image: 'src/assets/awal.png',
+      description: 'A socially driven short film with cinematic editing and a message of racial equality.',
+      image: ImgAwal,
       tags: ['Premiere Pro', 'After Effects', 'Photoshop'],
       previewType: 'video',
       previewSrc: 'https://www.youtube.com/embed/wHCb_g6XZis',
@@ -97,18 +104,18 @@ const Portfolio = () => {
     {
       type: 'web',
       title: 'afiftaqiya.com',
-      description: 'A fully functional blog built using the Blogger platform, enhanced with Google Analytics 4 for performance tracking and Google AdSense for monetization. Integrated with Google Tag Manager, Funding Choices, and Open Graph for better user experience, SEO, and cookie compliance. The site supports RSS feeds and runs over HTTP/3 for improved load speed and security.',
-      image: 'src/assets/afiftaqiya.com.png',
+      description: 'A Blogger-powered blog enhanced with Analytics, AdSense, and SEO tools.',
+      image: ImgAfiftaqiya,
       tags: ['Blogger', 'Python', 'Java'],
       previewType: 'image',
-      previewSrc: 'afiftaqiya.blogspot.com',
-      url: 'afiftaqiya.blogspot.com',
+      previewSrc: ImgAfiftaqiya,
+      url: 'https://afiftaqiya.blogspot.com',
     },
-      {
+    {
       type: 'video',
-      title: 'P5 “Bangunlah Jiwa dan Raganya” Kegiatan Kerohanian & Gerakan Senam Sehat Bersama',
-      description: 'Edited using Adobe Premiere Pro, this video showcases P5 activities at SMA Negeri 1, highlighting interfaith worship and a healthy breakfast movement. It emphasizes the importance of tolerance, health awareness, and spiritual balance among students.',
-      image: 'src/assets/p5.jpg',
+      title: 'P5 “Bangunlah Jiwa dan Raganya”',
+      description: 'Video of P5 interfaith and health activities edited with Adobe Premiere Pro.',
+      image: ImgP5,
       tags: ['Premiere Pro', 'After Effects'],
       previewType: 'video',
       previewSrc: 'https://www.youtube.com/embed/wjZQ-SafEwo',
