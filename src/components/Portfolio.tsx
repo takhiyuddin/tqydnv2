@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Eye, X, ExternalLink, Calendar, User, Tag, Globe, ArrowRight, Clock, Award } from 'lucide-react';
 
-import ImgTaqiyuddin from '../assets/taqiyuddin.png';
-import ImgHealthy from '../assets/healthy.png';
-import ImgIris from '../assets/iris.png';
-import ImgAwal from '../assets/awal.png';
-import ImgAfiftaqiya from '../assets/afiftaqiya.com.png';
-import ImgP5 from '../assets/p5.jpg';
+// Mock images - in real implementation, these would be your actual image imports
+const mockImages = {
+  taqiyuddin: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop',
+  healthy: 'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=300&fit=crop',
+  iris: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop',
+  awal: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop',
+  afiftaqiya: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop',
+  p5: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop'
+};
 
 interface Project {
   type: 'video' | 'web';
@@ -97,7 +100,7 @@ const Portfolio = () => {
       type: 'web',
       title: 'Taqiyuddin Afif Portfolio v2.1',
       description: 'Developed from scratch using React, styled with Lucide icons, and powered by Vite for a fast, modular workflow.',
-      image: ImgTaqiyuddin,
+      image: mockImages.taqiyuddin,
       tags: ['React', 'Lucide', 'Vite'],
       date: 'December 2024',
       role: 'Full-Stack Developer',
@@ -139,7 +142,7 @@ const Portfolio = () => {
       type: 'video',
       title: 'Healthy School Project',
       description: 'Edited a school awareness video focusing on smoking prevention, personal health, and environmental consciousness.',
-      image: ImgHealthy,
+      image: mockImages.healthy,
       tags: ['Premiere Pro', 'After Effects', 'Canva'],
       date: 'October 2024',
       role: 'Video Editor & Motion Graphics Designer',
@@ -180,7 +183,7 @@ const Portfolio = () => {
       type: 'video',
       title: 'Short Film "Iris"',
       description: 'A short film edited entirely using Adobe Premiere Pro, with soft color tones and cinematic transitions.',
-      image: ImgIris,
+      image: mockImages.iris,
       tags: ['After Effects', 'Premiere Pro'],
       date: 'September 2024',
       role: 'Video Editor & Colorist',
@@ -214,132 +217,6 @@ const Portfolio = () => {
           'Significance of audio design in creating immersive experiences',
           'Benefits of planning post-production workflow in advance',
           'Impact of consistent visual language on storytelling effectiveness'
-        ]
-      }
-    },
-    {
-      type: 'video',
-      title: 'Short Film "Awal"',
-      description: 'A socially driven short film with cinematic editing and a message of racial equality.',
-      image: ImgAwal,
-      tags: ['Premiere Pro', 'After Effects', 'Photoshop'],
-      date: 'August 2024',
-      role: 'Video Editor & Visual Effects Artist',
-      youtubeId: 'wHCb_g6XZis',
-      blogContent: {
-        overview: '"Awal" is a powerful short film that addresses important social issues, particularly focusing on racial equality and social justice. This project required sensitive handling of serious subject matter while maintaining high production values. The film demonstrates my ability to work on socially conscious content and create meaningful visual narratives.',
-        challenge: 'Creating a film that addresses sensitive social issues required careful consideration of messaging, visual representation, and cultural sensitivity. The challenge was to create content that would provoke thought and discussion while remaining respectful and impactful.',
-        solution: 'I developed a comprehensive post-production approach that combined powerful visual storytelling with subtle yet effective editing techniques. Using Premiere Pro for editing, After Effects for visual enhancements, and Photoshop for graphic elements, I created a cohesive and impactful final product.',
-        features: [
-          'Thoughtful editing that supports the social message',
-          'Professional color grading to enhance emotional impact',
-          'Carefully selected music and sound design',
-          'Visual effects that reinforce the narrative themes',
-          'Graphic elements created in Photoshop for additional context',
-          'Smooth transitions that maintain viewer engagement',
-          'Professional title treatment and credits',
-          'Optimized delivery for multiple platforms'
-        ],
-        technologies: [
-          'Adobe Premiere Pro - Primary editing and assembly',
-          'Adobe After Effects - Visual effects and motion graphics',
-          'Adobe Photoshop - Graphic design and image manipulation',
-          'Professional color grading workflows',
-          'Audio editing and mixing techniques',
-          'Social media optimization and delivery formats'
-        ],
-        outcome: 'The film successfully conveyed its important social message while maintaining professional production quality. It sparked meaningful discussions about racial equality and demonstrated the power of visual media in addressing social issues.',
-        lessons: [
-          'Responsibility of content creators in addressing social issues',
-          'Importance of cultural sensitivity in visual storytelling',
-          'Value of collaboration in creating meaningful content',
-          'Significance of proper research when dealing with serious topics',
-          'Impact of visual media on social consciousness and change'
-        ]
-      }
-    },
-    {
-      type: 'web',
-      title: 'afiftaqiya.com',
-      description: 'A Blogger-powered blog enhanced with Analytics, AdSense, and SEO tools.',
-      image: ImgAfiftaqiya,
-      tags: ['Blogger', 'Python', 'Java'],
-      date: 'July 2024',
-      role: 'Web Developer & Content Creator',
-      url: 'https://afiftaqiya.blogspot.com',
-      blogContent: {
-        overview: 'afiftaqiya.com is a comprehensive blog platform built on Google Blogger, enhanced with custom features and optimizations. This project demonstrates my ability to work with existing platforms while adding custom functionality and optimizations for better performance and user experience.',
-        challenge: 'Working within the constraints of the Blogger platform while adding advanced features like analytics integration, SEO optimization, and monetization through AdSense. The challenge was to create a professional blog that could compete with custom-built solutions.',
-        solution: 'I leveraged Blogger\'s flexibility while adding custom code enhancements using Python for backend processes and Java for additional functionality. The blog was optimized for search engines and integrated with various analytics and monetization tools.',
-        features: [
-          'Custom theme design optimized for readability',
-          'Google Analytics integration for detailed visitor insights',
-          'AdSense integration for monetization',
-          'SEO optimization with proper meta tags and structure',
-          'Responsive design that works on all devices',
-          'Fast loading times through optimization techniques',
-          'Social media integration for content sharing',
-          'Comment system with spam protection',
-          'Search functionality for easy content discovery',
-          'Category and tag organization for better navigation'
-        ],
-        technologies: [
-          'Google Blogger - Primary blogging platform',
-          'HTML/CSS/JavaScript - Custom theme development',
-          'Python - Backend automation and data processing',
-          'Java - Additional functionality and integrations',
-          'Google Analytics - Visitor tracking and insights',
-          'Google AdSense - Monetization platform',
-          'SEO tools and techniques for better visibility'
-        ],
-        outcome: 'The blog successfully established an online presence with steady traffic growth and effective monetization. It demonstrates the ability to work with existing platforms while adding significant value through custom enhancements and optimizations.',
-        lessons: [
-          'Value of working within platform constraints while adding custom features',
-          'Importance of SEO optimization for organic traffic growth',
-          'Benefits of analytics integration for understanding audience behavior',
-          'Significance of responsive design in today\'s mobile-first world',
-          'Impact of content quality on long-term success'
-        ]
-      }
-    },
-    {
-      type: 'video',
-      title: 'P5 "Bangunlah Jiwa dan Raganya"',
-      description: 'Video of P5 interfaith and health activities edited with Adobe Premiere Pro.',
-      image: ImgP5,
-      tags: ['Premiere Pro', 'After Effects'],
-      date: 'June 2024',
-      role: 'Video Editor & Documentary Filmmaker',
-      youtubeId: 'wjZQ-SafEwo',
-      blogContent: {
-        overview: 'This documentary-style video captures the essence of P5 (Projek Penguatan Profil Pelajar Pancasila) activities focusing on interfaith dialogue and health awareness. The project required documenting real events while creating an engaging narrative that would inspire and educate viewers about the importance of unity and health consciousness.',
-        challenge: 'Creating a cohesive narrative from documentary footage while maintaining authenticity and educational value. The challenge was to balance entertainment with education, ensuring the video would engage viewers while delivering important messages about interfaith harmony and health awareness.',
-        solution: 'I employed documentary editing techniques combined with educational video principles. Using Premiere Pro for the main edit and After Effects for enhanced graphics and transitions, I created a compelling narrative that showcases the activities while highlighting their significance.',
-        features: [
-          'Documentary-style editing that maintains authenticity',
-          'Educational graphics and text overlays for context',
-          'Smooth transitions between different activity segments',
-          'Professional audio mixing for clear narration',
-          'Color correction to ensure visual consistency',
-          'Engaging opening and closing sequences',
-          'Subtitles for accessibility and comprehension',
-          'Optimized pacing for educational content'
-        ],
-        technologies: [
-          'Adobe Premiere Pro - Primary editing platform',
-          'Adobe After Effects - Motion graphics and visual enhancements',
-          'Audio editing tools for clear sound quality',
-          'Color correction and grading techniques',
-          'Text animation and graphic design elements',
-          'Export optimization for educational distribution'
-        ],
-        outcome: 'The video successfully documented the P5 activities and was used for educational purposes within the school system. It effectively communicated the importance of interfaith dialogue and health awareness while showcasing student participation and engagement.',
-        lessons: [
-          'Importance of storytelling in documentary-style content',
-          'Value of maintaining authenticity while enhancing production quality',
-          'Significance of clear audio in educational videos',
-          'Benefits of proper planning in documentary editing',
-          'Impact of visual consistency on professional presentation'
         ]
       }
     }
@@ -379,7 +256,6 @@ const Portfolio = () => {
                     </div>
                   </div>
                   
-                  {/* Static Floating Type Badge - No Animation */}
                   <div className="absolute top-4 right-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md ${
                       project.type === 'video' 
@@ -392,7 +268,6 @@ const Portfolio = () => {
                 </div>
 
                 <div className="p-6 relative">
-                  {/* Animated Border */}
                   <div className="absolute top-0 left-0 w-0 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 group-hover:w-full transition-all duration-500"></div>
                   
                   <button
@@ -418,7 +293,6 @@ const Portfolio = () => {
                     ))}
                   </div>
 
-                  {/* Date and Role Info */}
                   <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-150">
                     <span className="flex items-center gap-1">
                       <Calendar size={12} />
@@ -436,43 +310,54 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Responsive Blog-Style Modal */}
+      {/* Ultra Responsive Modal - Adaptif ke Semua Device */}
       {isPopupOpen && selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 animate-fade-in">
-          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-5xl max-h-[98vh] sm:max-h-[95vh] shadow-2xl animate-scale-in transform overflow-hidden">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center animate-fade-in">
+          {/* Container yang responsif - menyesuaikan device */}
+          <div className="relative w-full h-full max-w-none max-h-none 
+                         xs:w-[95%] xs:h-[95%] xs:max-w-md xs:max-h-[90vh] xs:rounded-lg
+                         sm:w-[90%] sm:h-[90%] sm:max-w-2xl sm:max-h-[85vh] sm:rounded-xl
+                         md:w-[85%] md:h-[85%] md:max-w-4xl md:max-h-[80vh] md:rounded-2xl
+                         lg:w-[80%] lg:h-[80%] lg:max-w-5xl lg:max-h-[75vh]
+                         xl:w-[75%] xl:h-[75%] xl:max-w-6xl xl:max-h-[70vh]
+                         bg-white shadow-2xl animate-scale-in transform overflow-hidden">
+            
             {/* Reading Progress Bar */}
-            <div className="absolute top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out z-10"
+            <div className="absolute top-0 left-0 h-0.5 sm:h-1 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out z-10"
                  style={{ width: `${readingProgress}%` }}></div>
             
-            {/* Responsive Header - Fixed to match Healthy School Project */}
-            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-4 sm:p-6 z-10">
-              <div className="flex items-start justify-between gap-4">
+            {/* Header yang Sticky */}
+            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 z-10
+                           p-2 xs:p-3 sm:p-4 md:p-5 lg:p-6">
+              <div className="flex items-start justify-between gap-2 sm:gap-4">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                     <div className="relative flex-shrink-0">
-                      <div className="p-2 sm:p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg shadow-sm">
-                        {selectedProject.type === 'video' ? <Play size={20} className="text-slate-700" /> : <Globe size={20} className="text-slate-700" />}
+                      <div className="p-1.5 sm:p-2 md:p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-md sm:rounded-lg shadow-sm">
+                        {selectedProject.type === 'video' ? 
+                          <Play size={16} className="sm:w-5 sm:h-5 text-slate-700" /> : 
+                          <Globe size={16} className="sm:w-5 sm:h-5 text-slate-700" />
+                        }
                       </div>
-                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full"></div>
                     </div>
                     <div className="min-w-0 flex-1">
-                      {/* Fixed title display - no truncation, allow wrapping */}
-                      <h2 className="text-lg sm:text-2xl font-bold text-slate-900 mb-1 leading-tight">
+                      <h2 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-slate-900 mb-1 leading-tight line-clamp-2">
                         {selectedProject.title}
                       </h2>
-                      <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-slate-500">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 md:gap-3 text-xs sm:text-sm text-slate-500">
                         <div className="flex items-center gap-1">
-                          <Calendar size={12} />
-                          <span>{selectedProject.date}</span>
+                          <Calendar size={10} className="sm:w-3 sm:h-3" />
+                          <span className="text-xs sm:text-sm">{selectedProject.date}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <User size={12} />
-                          <span className="hidden sm:inline">{selectedProject.role}</span>
-                          <span className="sm:hidden">{selectedProject.role.split(' ')[0]}</span>
+                          <User size={10} className="sm:w-3 sm:h-3" />
+                          <span className="text-xs sm:text-sm hidden xs:inline">{selectedProject.role}</span>
+                          <span className="text-xs sm:text-sm xs:hidden">{selectedProject.role.split(' ')[0]}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Clock size={12} />
-                          <span>5 min read</span>
+                          <Clock size={10} className="sm:w-3 sm:h-3" />
+                          <span className="text-xs sm:text-sm">5 min</span>
                         </div>
                       </div>
                     </div>
@@ -480,20 +365,20 @@ const Portfolio = () => {
                 </div>
                 <button
                   onClick={handleCloseBlog}
-                  className="flex-shrink-0 p-2 sm:p-3 hover:bg-slate-100 rounded-lg transition-all duration-200 hover:rotate-90 transform group"
+                  className="flex-shrink-0 p-1.5 sm:p-2 md:p-3 hover:bg-slate-100 rounded-md sm:rounded-lg transition-all duration-200 hover:rotate-90 transform group"
                 >
-                  <X size={20} className="group-hover:text-red-500 transition-colors" />
+                  <X size={16} className="sm:w-5 sm:h-5 group-hover:text-red-500 transition-colors" />
                 </button>
               </div>
             </div>
 
             {/* Scrollable Content */}
-            <div className="blog-modal-content overflow-y-auto max-h-[calc(98vh-100px)] sm:max-h-[calc(95vh-120px)]">
-              <div className="p-4 sm:p-8 space-y-6 sm:space-y-10">
+            <div className="blog-modal-content overflow-y-auto h-full pb-20 sm:pb-24">
+              <div className="p-2 xs:p-3 sm:p-4 md:p-6 lg:p-8 space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8">
                 {/* Hero Section */}
                 <div className="animate-scale-in-delayed">
                   {selectedProject.type === 'video' && selectedProject.youtubeId ? (
-                    <div className="relative aspect-video w-full rounded-lg sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-2xl group">
+                    <div className="relative aspect-video w-full rounded-md sm:rounded-lg md:rounded-xl overflow-hidden shadow-md sm:shadow-lg md:shadow-2xl">
                       <iframe
                         className="w-full h-full"
                         src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
@@ -507,21 +392,21 @@ const Portfolio = () => {
                       <img
                         src={selectedProject.image}
                         alt={selectedProject.title}
-                        className="w-full h-48 sm:h-80 object-cover rounded-lg sm:rounded-2xl shadow-lg sm:shadow-2xl"
+                        className="w-full h-32 xs:h-40 sm:h-48 md:h-64 lg:h-80 object-cover rounded-md sm:rounded-lg md:rounded-xl shadow-md sm:shadow-lg md:shadow-2xl"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-lg sm:rounded-2xl"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-md sm:rounded-lg md:rounded-xl"></div>
                     </div>
                   )}
                 </div>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 sm:gap-3 animate-fade-in-delayed">
+                <div className="flex flex-wrap gap-1 sm:gap-2 md:gap-3 animate-fade-in-delayed">
                   {selectedProject.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full text-xs sm:text-sm font-medium hover:from-slate-200 hover:to-slate-300 transition-all duration-300 cursor-default shadow-sm"
+                      className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full text-xs sm:text-sm font-medium hover:from-slate-200 hover:to-slate-300 transition-all duration-300 cursor-default shadow-sm"
                     >
-                      <Tag size={12} />
+                      <Tag size={10} className="sm:w-3 sm:h-3" />
                       {tag}
                     </span>
                   ))}
@@ -533,237 +418,83 @@ const Portfolio = () => {
                     { 
                       title: 'Project Overview', 
                       content: selectedProject.blogContent.overview,
-                      icon: <Globe size={18} />,
+                      icon: <Globe size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />,
                       gradient: 'from-blue-500 to-cyan-500'
                     },
                     { 
                       title: 'The Challenge', 
                       content: selectedProject.blogContent.challenge,
-                      icon: <Award size={18} />,
+                      icon: <Award size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />,
                       gradient: 'from-orange-500 to-red-500'
                     },
                     { 
                       title: 'The Solution', 
                       content: selectedProject.blogContent.solution,
-                      icon: <ArrowRight size={18} />,
+                      icon: <ArrowRight size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />,
                       gradient: 'from-green-500 to-emerald-500'
                     }
                   ].map((section, index) => (
-                    <section key={index} className="mb-6 sm:mb-10">
-                      <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                        <div className={`p-2 sm:p-3 bg-gradient-to-r ${section.gradient} rounded-lg text-white shadow-lg`}>
+                    <section key={index} className="mb-4 sm:mb-6 md:mb-8">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                        <div className={`p-1.5 sm:p-2 md:p-3 bg-gradient-to-r ${section.gradient} rounded-md sm:rounded-lg text-white shadow-md sm:shadow-lg`}>
                           {section.icon}
                         </div>
-                        <h3 className="text-lg sm:text-2xl font-bold text-slate-900">
+                        <h3 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-slate-900">
                           {section.title}
                         </h3>
                       </div>
-                      <div className="bg-gradient-to-r from-slate-50 to-white p-4 sm:p-6 rounded-lg border border-slate-200 shadow-sm">
-                        <p className="text-slate-700 leading-relaxed text-sm sm:text-lg">{section.content}</p>
+                      <div className="bg-gradient-to-r from-slate-50 to-white p-3 sm:p-4 md:p-6 rounded-md sm:rounded-lg border border-slate-200 shadow-sm">
+                        <p className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg">{section.content}</p>
                       </div>
                     </section>
                   ))}
 
                   {/* Features Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white shadow-lg">
-                        <Award size={18} />
+                  <section className="mb-4 sm:mb-6 md:mb-8">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-1.5 sm:p-2 md:p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md sm:rounded-lg text-white shadow-md sm:shadow-lg">
+                        <Award size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
                       </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Key Features</h3>
+                      <h3 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-slate-900">Key Features</h3>
                     </div>
-                    <div className="grid gap-3 sm:gap-4">
+                    <div className="grid gap-2 sm:gap-3 md:gap-4">
                       {selectedProject.blogContent.features.map((feature, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 md:p-4 bg-white border border-slate-200 rounded-md sm:rounded-lg hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-700 leading-relaxed text-sm sm:text-base">{feature}</span>
+                          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{feature}</span>
                         </div>
                       ))}
                     </div>
                   </section>
 
                   {/* Technologies Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg text-white shadow-lg">
-                        <Tag size={18} />
+                  <section className="mb-4 sm:mb-6 md:mb-8">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-1.5 sm:p-2 md:p-3 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-md sm:rounded-lg text-white shadow-md sm:shadow-lg">
+                        <Tag size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
                       </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Technologies Used</h3>
+                      <h3 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-slate-900">Technologies</h3>
                     </div>
                     <div className="space-y-2 sm:space-y-3">
                       {selectedProject.blogContent.technologies.map((tech, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-lg hover:from-white hover:to-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 sm:gap-3 md:gap-4 p-2 sm:p-3 md:p-4 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-md sm:rounded-lg hover:from-white hover:to-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-700 leading-relaxed font-medium text-sm sm:text-base">{tech}</span>
+                          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed font-medium text-xs sm:text-sm md:text-base">{tech}</span>
                         </div>
                       ))}
                     </div>
                   </section>
 
                   {/* Outcome Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white shadow-lg">
-                        <Award size={18} />
+                  <section className="mb-4 sm:mb-6 md:mb-8">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-1.5 sm:p-2 md:p-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-md sm:rounded-lg text-white shadow-md sm:shadow-lg">
+                        <Award size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
                       </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Outcome & Results</h3>
-                    </div>
-                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-4 sm:p-6 rounded-lg border border-emerald-200 shadow-sm">
-                      <p className="text-slate-700 leading-relaxed text-sm sm:text-lg">{selectedProject.blogContent.outcome}</p>
-                    </div>
-                  </section>
-
-                  {/* Lessons Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-white shadow-lg">
-                        <Award size={18} />
-                      </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Key Learnings</h3>
-                    </div>
-                    <div className="space-y-2 sm:space-y-3">
-                      {selectedProject.blogContent.lessons.map((lesson, index) => (
-                        <div 
-                          key={index} 
-                          className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg hover:from-orange-50 hover:to-amber-50 hover:shadow-md transition-all duration-300"
-                        >
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-700 leading-relaxed text-sm sm:text-base">{lesson}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                </article>
-
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-slate-200">
-                  {selectedProject.type === 'video' && selectedProject.youtubeId && (
-                    <a
-                      href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:from-red-700 hover:to-red-800 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group text-sm sm:text-base"
-                    >
-                      <Play size={18} className="group-hover:scale-110 transition-transform duration-200" />
-                      Watch on YouTube
-                    </a>
-                  )}
-                  {selectedProject.type === 'web' && selectedProject.url && (
-                    <a
-                      href={selectedProject.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:from-slate-800 hover:to-slate-700 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group text-sm sm:text-base"
-                    >
-                      <ExternalLink size={18} className="group-hover:scale-110 transition-transform duration-200" />
-                      Visit Website
-                    </a>
-                  )}
-                  <button
-                    onClick={handleCloseBlog}
-                    className="flex items-center justify-center gap-3 border-2 border-slate-300 text-slate-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:border-slate-400 hover:bg-slate-50 hover:scale-105 transition-all duration-300 transform group text-sm sm:text-base"
-                  >
-                    <X size={18} className="group-hover:rotate-90 transition-transform duration-200" />
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <style jsx>{`
-        .portfolio-card {
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .portfolio-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-        }
-
-        .portfolio-action-btn {
-          backdrop-filter: blur(12px);
-        }
-
-        .portfolio-title {
-          position: relative;
-          overflow: hidden;
-        }
-
-        .portfolio-title::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(90deg, #64748b, #475569);
-          transition: width 0.3s ease;
-        }
-
-        .portfolio-title:hover::after {
-          width: 100%;
-        }
-
-        .portfolio-tag {
-          position: relative;
-          overflow: hidden;
-        }
-
-        .portfolio-tag::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-          transition: left 0.5s;
-        }
-
-        .portfolio-tag:hover::before {
-          left: 100%;
-        }
-
-        .blog-modal-content {
-          scrollbar-width: thin;
-          scrollbar-color: #cbd5e1 #f8fafc;
-        }
-
-        .blog-modal-content::-webkit-scrollbar {
-          width: 4px;
-        }
-
-        .blog-modal-content::-webkit-scrollbar-track {
-          background: #f8fafc;
-          border-radius: 2px;
-        }
-
-        .blog-modal-content::-webkit-scrollbar-thumb {
-          background: #cbd5e1;
-          border-radius: 2px;
-        }
-
-        .blog-modal-content::-webkit-scrollbar-thumb:hover {
-          background: #94a3b8;
-        }
-
-        @media (max-width: 640px) {
-          .blog-modal-content::-webkit-scrollbar {
-            width: 2px;
-          }
-        }
-      `}</style>
-    </section>
-  );
-};
-
-export default Portfolio;
+                      <h3 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-slate-900">Outcome & Results
