@@ -456,7 +456,6 @@ const Portfolio = () => {
                       <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                     </div>
                     <div className="min-w-0 flex-1">
-                      {/* Fixed title display - no truncation, allow wrapping */}
                       <h2 className="text-lg sm:text-2xl font-bold text-slate-900 mb-1 leading-tight">
                         {selectedProject.title}
                       </h2>
@@ -489,7 +488,7 @@ const Portfolio = () => {
 
             {/* Scrollable Content */}
             <div className="blog-modal-content overflow-y-auto max-h-[calc(98vh-100px)] sm:max-h-[calc(95vh-120px)]">
-              <div className="p-4 sm:p-8 space-y-6 sm:space-y-10">
+              <div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
                 {/* Hero Section */}
                 <div className="animate-scale-in-delayed">
                   {selectedProject.type === 'video' && selectedProject.youtubeId ? (
@@ -528,113 +527,113 @@ const Portfolio = () => {
                 </div>
 
                 {/* Blog Content */}
-                <article className="prose prose-slate max-w-none">
+                <article className="prose prose-sm prose-slate max-w-none">
                   {[
                     { 
                       title: 'Project Overview', 
                       content: selectedProject.blogContent.overview,
-                      icon: <Globe size={18} />,
+                      icon: <Globe size={16} />,
                       gradient: 'from-blue-500 to-cyan-500'
                     },
                     { 
                       title: 'The Challenge', 
                       content: selectedProject.blogContent.challenge,
-                      icon: <Award size={18} />,
+                      icon: <Award size={16} />,
                       gradient: 'from-orange-500 to-red-500'
                     },
                     { 
                       title: 'The Solution', 
                       content: selectedProject.blogContent.solution,
-                      icon: <ArrowRight size={18} />,
+                      icon: <ArrowRight size={16} />,
                       gradient: 'from-green-500 to-emerald-500'
                     }
                   ].map((section, index) => (
-                    <section key={index} className="mb-6 sm:mb-10">
-                      <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                        <div className={`p-2 sm:p-3 bg-gradient-to-r ${section.gradient} rounded-lg text-white shadow-lg`}>
+                    <section key={index} className="mb-4 sm:mb-6">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                        <div className={`p-2 bg-gradient-to-r ${section.gradient} rounded-lg text-white shadow-sm`}>
                           {section.icon}
                         </div>
-                        <h3 className="text-lg sm:text-2xl font-bold text-slate-900">
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900">
                           {section.title}
                         </h3>
                       </div>
-                      <div className="bg-gradient-to-r from-slate-50 to-white p-4 sm:p-6 rounded-lg border border-slate-200 shadow-sm">
-                        <p className="text-slate-700 leading-relaxed text-sm sm:text-lg">{section.content}</p>
+                      <div className="bg-gradient-to-r from-slate-50 to-white p-3 sm:p-4 rounded-lg border border-slate-200 shadow-sm">
+                        <p className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{section.content}</p>
                       </div>
                     </section>
                   ))}
 
                   {/* Features Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white shadow-lg">
-                        <Award size={18} />
+                  <section className="mb-4 sm:mb-6">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white shadow-sm">
+                        <Award size={16} />
                       </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Key Features</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Key Features</h3>
                     </div>
-                    <div className="grid gap-3 sm:gap-4">
+                    <div className="grid gap-2 sm:gap-3">
                       {selectedProject.blogContent.features.map((feature, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 p-2 sm:p-3 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-700 leading-relaxed text-sm sm:text-base">{feature}</span>
+                          <div className="w-1 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{feature}</span>
                         </div>
                       ))}
                     </div>
                   </section>
 
                   {/* Technologies Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg text-white shadow-lg">
-                        <Tag size={18} />
+                  <section className="mb-4 sm:mb-6">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg text-white shadow-sm">
+                        <Tag size={16} />
                       </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Technologies Used</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Technologies Used</h3>
                     </div>
                     <div className="space-y-2 sm:space-y-3">
                       {selectedProject.blogContent.technologies.map((tech, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-lg hover:from-white hover:to-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-lg hover:from-white hover:to-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-700 leading-relaxed font-medium text-sm sm:text-base">{tech}</span>
+                          <div className="w-1 h-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed font-medium text-xs sm:text-sm md:text-base">{tech}</span>
                         </div>
                       ))}
                     </div>
                   </section>
 
                   {/* Outcome Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white shadow-lg">
-                        <Award size={18} />
+                  <section className="mb-4 sm:mb-6">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white shadow-sm">
+                        <Award size={16} />
                       </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Outcome & Results</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Outcome & Results</h3>
                     </div>
-                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-4 sm:p-6 rounded-lg border border-emerald-200 shadow-sm">
-                      <p className="text-slate-700 leading-relaxed text-sm sm:text-lg">{selectedProject.blogContent.outcome}</p>
+                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-3 sm:p-4 rounded-lg border border-emerald-200 shadow-sm">
+                      <p className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{selectedProject.blogContent.outcome}</p>
                     </div>
                   </section>
 
                   {/* Lessons Section */}
-                  <section className="mb-6 sm:mb-10">
-                    <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                      <div className="p-2 sm:p-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-white shadow-lg">
-                        <Award size={18} />
+                  <section className="mb-4 sm:mb-6">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-white shadow-sm">
+                        <Award size={16} />
                       </div>
-                      <h3 className="text-lg sm:text-2xl font-bold text-slate-900">Key Learnings</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Key Learnings</h3>
                     </div>
                     <div className="space-y-2 sm:space-y-3">
                       {selectedProject.blogContent.lessons.map((lesson, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg hover:from-orange-50 hover:to-amber-50 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg hover:from-orange-50 hover:to-amber-50 hover:shadow-md transition-all duration-300"
                         >
-                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-700 leading-relaxed text-sm sm:text-base">{lesson}</span>
+                          <div className="w-1 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{lesson}</span>
                         </div>
                       ))}
                     </div>
