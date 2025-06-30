@@ -33,7 +33,6 @@ const Portfolio = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -62,27 +61,13 @@ const Portfolio = () => {
   const handleOpenBlog = (project: Project) => {
     setSelectedProject(project);
     setIsPopupOpen(true);
-    setIsAnimating(true);
     document.body.style.overflow = 'hidden';
-    
-    // Trigger content animations after modal opens
-    setTimeout(() => {
-      const sections = document.querySelectorAll('.blog-section');
-      sections.forEach((section, index) => {
-        setTimeout(() => {
-          section.classList.add('animate-in');
-        }, index * 150);
-      });
-    }, 300);
   };
 
   const handleCloseBlog = () => {
-    setIsAnimating(false);
-    setTimeout(() => {
-      setIsPopupOpen(false);
-      setSelectedProject(null);
-      document.body.style.overflow = 'unset';
-    }, 300);
+    setIsPopupOpen(false);
+    setSelectedProject(null);
+    document.body.style.overflow = 'unset';
   };
 
   const projects: Project[] = [
@@ -358,24 +343,31 @@ const Portfolio = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    {project.type === 'video' ? (
                       <button
-                        className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/30 hover:scale-110 transition-all duration-300 shadow-lg"
+                        className="p-3 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-all duration-200"
                         onClick={() => handleOpenBlog(project)}
                       >
-                        {project.type === 'video' ? <Play size={24} /> : <Eye size={24} />}
+                        <Play size={20} />
                       </button>
-                    </div>
+                    ) : (
+                      <button
+                        className="p-3 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-all duration-200"
+                        onClick={() => handleOpenBlog(project)}
+                      >
+                        <Eye size={20} />
+                      </button>
+                    )}
                   </div>
                 </div>
 
                 <div className="p-6">
                   <button
                     onClick={() => handleOpenBlog(project)}
-                    className="text-lg font-medium text-slate-900 mb-3 hover:text-blue-600 transition-colors duration-300 text-left w-full group-hover:text-blue-600"
+                    className="text-lg font-medium text-slate-900 mb-3 hover:text-slate-600 transition-colors duration-200 text-left w-full"
                   >
                     {project.title}
                   </button>
@@ -384,7 +376,7 @@ const Portfolio = () => {
                     {project.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium hover:bg-slate-200 transition-colors duration-200"
+                        className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium"
                       >
                         {tag}
                       </span>
@@ -397,37 +389,24 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Animated Blog-Style Pop-up */}
+      {/* Blog-Style Pop-up */}
       {isPopupOpen && selectedProject && (
-        <div 
-          className={`fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto transition-all duration-300 ${
-            isAnimating ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div 
-            className={`bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all duration-500 ${
-              isAnimating ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-8 opacity-0'
-            }`}
-          >
-            {/* Animated Header */}
-            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-6 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            {/* Header */}
+            <div className="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="p-2 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg transform hover:scale-110 transition-transform duration-200">
-                  {selectedProject.type === 'video' ? 
-                    <Play size={20} className="text-blue-600" /> : 
-                    <Globe size={20} className="text-purple-600" />
-                  }
+                <div className="p-2 bg-slate-100 rounded-lg">
+                  {selectedProject.type === 'video' ? <Play size={20} /> : <Globe size={20} />}
                 </div>
                 <div>
-                  <h2 className="text-2xl font-semibold text-slate-900 hover:text-blue-600 transition-colors duration-200">
-                    {selectedProject.title}
-                  </h2>
+                  <h2 className="text-2xl font-semibold text-slate-900">{selectedProject.title}</h2>
                   <div className="flex items-center gap-4 text-sm text-slate-500 mt-1">
-                    <div className="flex items-center gap-1 hover:text-slate-700 transition-colors duration-200">
+                    <div className="flex items-center gap-1">
                       <Calendar size={14} />
                       <span>{selectedProject.date}</span>
                     </div>
-                    <div className="flex items-center gap-1 hover:text-slate-700 transition-colors duration-200">
+                    <div className="flex items-center gap-1">
                       <User size={14} />
                       <span>{selectedProject.role}</span>
                     </div>
@@ -436,20 +415,20 @@ const Portfolio = () => {
               </div>
               <button
                 onClick={handleCloseBlog}
-                className="p-2 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200 transform hover:scale-110"
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors duration-200"
               >
                 <X size={24} />
               </button>
             </div>
 
-            {/* Animated Content */}
+            {/* Content */}
             <div className="p-6 space-y-8">
-              {/* Featured Image/Video with Animation */}
-              <div className="w-full blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+              {/* Featured Image/Video */}
+              <div className="w-full">
                 {selectedProject.type === 'video' && selectedProject.youtubeId ? (
-                  <div className="aspect-video w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="aspect-video w-full">
                     <iframe
-                      className="w-full h-full"
+                      className="w-full h-full rounded-lg"
                       src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
                       title={selectedProject.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -460,18 +439,17 @@ const Portfolio = () => {
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.title}
-                    className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+                    className="w-full h-64 object-cover rounded-lg"
                   />
                 )}
               </div>
 
-              {/* Animated Tags */}
-              <div className="flex flex-wrap gap-2 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2">
                 {selectedProject.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full text-sm font-medium hover:from-blue-100 hover:to-purple-100 hover:text-blue-700 transition-all duration-300 transform hover:scale-105"
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    className="flex items-center gap-1 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
                   >
                     <Tag size={12} />
                     {tag}
@@ -479,84 +457,58 @@ const Portfolio = () => {
                 ))}
               </div>
 
-              {/* Animated Blog Content */}
+              {/* Blog Content */}
               <article className="prose prose-slate max-w-none">
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
-                    Project Overview
-                  </h3>
+                <section className="mb-8">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Project Overview</h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.overview}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
-                    The Challenge
-                  </h3>
+                <section className="mb-8">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">The Challenge</h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.challenge}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
-                    The Solution
-                  </h3>
+                <section className="mb-8">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">The Solution</h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.solution}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
-                    Key Features
-                  </h3>
+                <section className="mb-8">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Features</h3>
                   <ul className="space-y-2">
                     {selectedProject.blogContent.features.map((feature, index) => (
-                      <li 
-                        key={index} 
-                        className="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
-                        style={{ animationDelay: `${index * 50}ms` }}
-                      >
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-slate-600 leading-relaxed">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
-                    Technologies Used
-                  </h3>
+                <section className="mb-8">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Technologies Used</h3>
                   <ul className="space-y-2">
                     {selectedProject.blogContent.technologies.map((tech, index) => (
-                      <li 
-                        key={index} 
-                        className="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
-                        style={{ animationDelay: `${index * 50}ms` }}
-                      >
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-slate-600 leading-relaxed">{tech}</span>
                       </li>
                     ))}
                   </ul>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
-                    Outcome & Results
-                  </h3>
+                <section className="mb-8">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Outcome & Results</h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.outcome}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
-                    Key Learnings
-                  </h3>
+                <section className="mb-8">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Learnings</h3>
                   <ul className="space-y-2">
                     {selectedProject.blogContent.lessons.map((lesson, index) => (
-                      <li 
-                        key={index} 
-                        className="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
-                        style={{ animationDelay: `${index * 50}ms` }}
-                      >
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-slate-600 leading-relaxed">{lesson}</span>
                       </li>
                     ))}
@@ -564,14 +516,14 @@ const Portfolio = () => {
                 </section>
               </article>
 
-              {/* Animated Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200">
                 {selectedProject.type === 'video' && selectedProject.youtubeId && (
                   <a
                     href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-lg font-medium hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200"
                   >
                     <Play size={16} />
                     Watch on YouTube
@@ -582,7 +534,7 @@ const Portfolio = () => {
                     href={selectedProject.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-slate-900 to-slate-800 text-white px-6 py-3 rounded-lg font-medium hover:from-slate-800 hover:to-slate-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors duration-200"
                   >
                     <ExternalLink size={16} />
                     Visit Website
@@ -590,7 +542,7 @@ const Portfolio = () => {
                 )}
                 <button
                   onClick={handleCloseBlog}
-                  className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-300 transform hover:scale-105"
+                  className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200"
                 >
                   Close
                 </button>
@@ -599,13 +551,6 @@ const Portfolio = () => {
           </div>
         </div>
       )}
-
-      <style jsx>{`
-        .blog-section.animate-in {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
-        }
-      `}</style>
     </section>
   );
 };
