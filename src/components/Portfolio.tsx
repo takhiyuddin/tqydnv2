@@ -444,7 +444,7 @@ const Portfolio = () => {
             <div className="absolute top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out z-10"
                  style={{ width: `${readingProgress}%` }}></div>
             
-            {/* Responsive Header */}
+            {/* Responsive Header - Fixed to match Healthy School Project */}
             <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-4 sm:p-6 z-10">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
@@ -456,7 +456,8 @@ const Portfolio = () => {
                       <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h2 className="text-lg sm:text-2xl font-bold text-slate-900 mb-1 truncate">
+                      {/* Fixed title display - no truncation, allow wrapping */}
+                      <h2 className="text-lg sm:text-2xl font-bold text-slate-900 mb-1 leading-tight">
                         {selectedProject.title}
                       </h2>
                       <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-slate-500">
@@ -466,7 +467,8 @@ const Portfolio = () => {
                         </div>
                         <div className="flex items-center gap-1">
                           <User size={12} />
-                          <span className="truncate">{selectedProject.role}</span>
+                          <span className="hidden sm:inline">{selectedProject.role}</span>
+                          <span className="sm:hidden">{selectedProject.role.split(' ')[0]}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock size={12} />
