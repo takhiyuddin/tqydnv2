@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Eye, X, ExternalLink, Calendar, User, Tag, Globe } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import ImgTaqiyuddin from '../assets/taqiyuddin.png';
 import ImgHealthy from '../assets/healthy.png';
@@ -323,234 +324,477 @@ const Portfolio = () => {
     }
   ];
 
+  // Animation variants for Framer Motion
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    },
+    hover: {
+      y: -8,
+      scale: 1.02,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const imageVariants = {
+    hover: {
+      scale: 1.1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    hover: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    },
+    tap: {
+      scale: 0.95,
+      rotate: 0
+    }
+  };
+
+  const modalVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      y: 50
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.8,
+      y: 50,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.3
+      }
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.3
+      }
+    }
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: 0.2,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const sectionVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.4
+      }
+    }
+  };
+
   return (
-    <section ref={sectionRef} id="portfolio" className="py-24 bg-white relative">
+    <section ref={sectionRef} id="portfolio" className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 fade-in-on-scroll">
+          <motion.div 
+            className="text-center mb-16 fade-in-on-scroll"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
             <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               Portfolio Showcase
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
             {projects.map((project, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white border border-slate-200 rounded-lg overflow-hidden card-hover scale-in-on-scroll group"
+                variants={cardVariants}
+                whileHover="hover"
+                className="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm cursor-pointer"
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <motion.img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-48 object-cover"
+                    variants={imageVariants}
                   />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    {project.type === 'video' ? (
-                      <button
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-all duration-200"
-                        onClick={() => handleOpenBlog(project)}
-                      >
-                        <Play size={20} />
-                      </button>
-                    ) : (
-                      <button
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-all duration-200"
-                        onClick={() => handleOpenBlog(project)}
-                      >
-                        <Eye size={20} />
-                      </button>
-                    )}
-                  </div>
+                  <motion.div 
+                    className="absolute inset-0 bg-black/60 flex items-center justify-center"
+                    variants={overlayVariants}
+                    initial="hidden"
+                    whileHover="hover"
+                  >
+                    <motion.button
+                      className="p-3 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-all duration-200"
+                      onClick={() => handleOpenBlog(project)}
+                      variants={buttonVariants}
+                      whileHover="hover"
+                      whileTap="tap"
+                    >
+                      {project.type === 'video' ? <Play size={20} /> : <Eye size={20} />}
+                    </motion.button>
+                  </motion.div>
                 </div>
 
                 <div className="p-6">
-                  <button
+                  <motion.button
                     onClick={() => handleOpenBlog(project)}
                     className="text-lg font-medium text-slate-900 mb-3 hover:text-slate-600 transition-colors duration-200 text-left w-full"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
                   >
                     {project.title}
-                  </button>
+                  </motion.button>
                   <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <motion.div 
+                    className="flex flex-wrap gap-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3, staggerChildren: 0.1 }}
+                  >
                     {project.tags.map((tag, tagIndex) => (
-                      <span
+                      <motion.span
                         key={tagIndex}
                         className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: tagIndex * 0.1 }}
+                        whileHover={{ scale: 1.05, backgroundColor: "#e2e8f0" }}
                       >
                         {tag}
-                      </span>
+                      </motion.span>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Blog-Style Pop-up */}
-      {isPopupOpen && selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            {/* Header */}
-            <div className="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-slate-100 rounded-lg">
-                  {selectedProject.type === 'video' ? <Play size={20} /> : <Globe size={20} />}
-                </div>
-                <div>
-                  <h2 className="text-2xl font-semibold text-slate-900">{selectedProject.title}</h2>
-                  <div className="flex items-center gap-4 text-sm text-slate-500 mt-1">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>{selectedProject.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <User size={14} />
-                      <span>{selectedProject.role}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={handleCloseBlog}
-                className="p-2 hover:bg-slate-100 rounded-lg transition-colors duration-200"
+      {/* Animated Blog-Style Pop-up */}
+      <AnimatePresence>
+        {isPopupOpen && selectedProject && (
+          <motion.div 
+            className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto"
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={handleCloseBlog}
+          >
+            <motion.div 
+              className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Animated Header */}
+              <motion.div 
+                className="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
               >
-                <X size={24} />
-              </button>
-            </div>
-
-            {/* Content */}
-            <div className="p-6 space-y-8">
-              {/* Featured Image/Video */}
-              <div className="w-full">
-                {selectedProject.type === 'video' && selectedProject.youtubeId ? (
-                  <div className="aspect-video w-full">
-                    <iframe
-                      className="w-full h-full rounded-lg"
-                      src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
-                      title={selectedProject.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                <div className="flex items-center gap-4">
+                  <motion.div 
+                    className="p-2 bg-slate-100 rounded-lg"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {selectedProject.type === 'video' ? <Play size={20} /> : <Globe size={20} />}
+                  </motion.div>
+                  <div>
+                    <motion.h2 
+                      className="text-2xl font-semibold text-slate-900"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {selectedProject.title}
+                    </motion.h2>
+                    <motion.div 
+                      className="flex items-center gap-4 text-sm text-slate-500 mt-1"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <div className="flex items-center gap-1">
+                        <Calendar size={14} />
+                        <span>{selectedProject.date}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <User size={14} />
+                        <span>{selectedProject.role}</span>
+                      </div>
+                    </motion.div>
                   </div>
-                ) : (
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                )}
-              </div>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {selectedProject.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="flex items-center gap-1 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
-                  >
-                    <Tag size={12} />
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Blog Content */}
-              <article className="prose prose-slate max-w-none">
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Project Overview</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.overview}</p>
-                </section>
-
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">The Challenge</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.challenge}</p>
-                </section>
-
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">The Solution</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.solution}</p>
-                </section>
-
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Features</h3>
-                  <ul className="space-y-2">
-                    {selectedProject.blogContent.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-slate-600 leading-relaxed">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Technologies Used</h3>
-                  <ul className="space-y-2">
-                    {selectedProject.blogContent.technologies.map((tech, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-slate-600 leading-relaxed">{tech}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Outcome & Results</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.outcome}</p>
-                </section>
-
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Learnings</h3>
-                  <ul className="space-y-2">
-                    {selectedProject.blogContent.lessons.map((lesson, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-slate-600 leading-relaxed">{lesson}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              </article>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200">
-                {selectedProject.type === 'video' && selectedProject.youtubeId && (
-                  <a
-                    href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200"
-                  >
-                    <Play size={16} />
-                    Watch on YouTube
-                  </a>
-                )}
-                {selectedProject.type === 'web' && selectedProject.url && (
-                  <a
-                    href={selectedProject.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors duration-200"
-                  >
-                    <ExternalLink size={16} />
-                    Visit Website
-                  </a>
-                )}
-                <button
+                </div>
+                <motion.button
                   onClick={handleCloseBlog}
-                  className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200"
+                  className="p-2 hover:bg-slate-100 rounded-lg transition-colors duration-200"
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+                  <X size={24} />
+                </motion.button>
+              </motion.div>
+
+              {/* Animated Content */}
+              <motion.div 
+                className="p-6 space-y-8"
+                variants={contentVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {/* Featured Image/Video with Animation */}
+                <motion.div 
+                  className="w-full"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                  {selectedProject.type === 'video' && selectedProject.youtubeId ? (
+                    <div className="aspect-video w-full">
+                      <iframe
+                        className="w-full h-full rounded-lg"
+                        src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
+                        title={selectedProject.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                  )}
+                </motion.div>
+
+                {/* Animated Tags */}
+                <motion.div 
+                  className="flex flex-wrap gap-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, staggerChildren: 0.1 }}
+                >
+                  {selectedProject.tags.map((tag, index) => (
+                    <motion.span
+                      key={index}
+                      className="flex items-center gap-1 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      whileHover={{ scale: 1.05, backgroundColor: "#e2e8f0" }}
+                    >
+                      <Tag size={12} />
+                      {tag}
+                    </motion.span>
+                  ))}
+                </motion.div>
+
+                {/* Animated Blog Content Sections */}
+                <article className="prose prose-slate max-w-none">
+                  {[
+                    { title: 'Project Overview', content: selectedProject.blogContent.overview },
+                    { title: 'The Challenge', content: selectedProject.blogContent.challenge },
+                    { title: 'The Solution', content: selectedProject.blogContent.solution }
+                  ].map((section, index) => (
+                    <motion.section 
+                      key={section.title}
+                      className="mb-8"
+                      variants={sectionVariants}
+                      initial="hidden"
+                      animate="visible"
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                    >
+                      <h3 className="text-xl font-semibold text-slate-900 mb-4">{section.title}</h3>
+                      <p className="text-slate-600 leading-relaxed">{section.content}</p>
+                    </motion.section>
+                  ))}
+
+                  {/* Animated Lists */}
+                  {[
+                    { title: 'Key Features', items: selectedProject.blogContent.features },
+                    { title: 'Technologies Used', items: selectedProject.blogContent.technologies },
+                    { title: 'Key Learnings', items: selectedProject.blogContent.lessons }
+                  ].map((listSection, sectionIndex) => (
+                    <motion.section 
+                      key={listSection.title}
+                      className="mb-8"
+                      variants={sectionVariants}
+                      initial="hidden"
+                      animate="visible"
+                      transition={{ delay: 0.7 + sectionIndex * 0.1 }}
+                    >
+                      <h3 className="text-xl font-semibold text-slate-900 mb-4">{listSection.title}</h3>
+                      <ul className="space-y-2">
+                        {listSection.items.map((item, itemIndex) => (
+                          <motion.li 
+                            key={itemIndex}
+                            className="flex items-start gap-3"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.8 + sectionIndex * 0.1 + itemIndex * 0.05 }}
+                          >
+                            <motion.div 
+                              className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ delay: 0.9 + sectionIndex * 0.1 + itemIndex * 0.05 }}
+                            />
+                            <span className="text-slate-600 leading-relaxed">{item}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.section>
+                  ))}
+
+                  <motion.section 
+                    className="mb-8"
+                    variants={sectionVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ delay: 1.0 }}
+                  >
+                    <h3 className="text-xl font-semibold text-slate-900 mb-4">Outcome & Results</h3>
+                    <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.outcome}</p>
+                  </motion.section>
+                </article>
+
+                {/* Animated Action Buttons */}
+                <motion.div 
+                  className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.1 }}
+                >
+                  {selectedProject.type === 'video' && selectedProject.youtubeId && (
+                    <motion.a
+                      href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Play size={16} />
+                      Watch on YouTube
+                    </motion.a>
+                  )}
+                  {selectedProject.type === 'web' && selectedProject.url && (
+                    <motion.a
+                      href={selectedProject.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors duration-200"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ExternalLink size={16} />
+                      Visit Website
+                    </motion.a>
+                  )}
+                  <motion.button
+                    onClick={handleCloseBlog}
+                    className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Close
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
