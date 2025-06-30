@@ -337,7 +337,7 @@ const Portfolio = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="portfolio-card bg-white border border-slate-200 rounded-lg overflow-hidden scale-in-on-scroll group"
+                className="portfolio-card bg-white border border-slate-200/60 rounded-xl overflow-hidden scale-in-on-scroll group shadow-sm hover:shadow-xl"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative overflow-hidden">
@@ -359,7 +359,7 @@ const Portfolio = () => {
                   
                   {/* Floating Type Badge */}
                   <div className="absolute top-4 right-4 transform translate-x-8 group-hover:translate-x-0 transition-transform duration-300">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md ${
+                    <span className={`px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-md ${
                       project.type === 'video' 
                         ? 'bg-red-500/80 text-white' 
                         : 'bg-blue-500/80 text-white'
@@ -369,26 +369,26 @@ const Portfolio = () => {
                   </div>
                 </div>
 
-                <div className="p-6 relative">
+                <div className="p-8 relative">
                   {/* Animated Border */}
-                  <div className="absolute top-0 left-0 w-0 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 group-hover:w-full transition-all duration-500"></div>
+                  <div className="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                   
                   <button
                     onClick={() => handleOpenBlog(project)}
-                    className="portfolio-title text-lg font-medium text-slate-900 mb-3 hover:text-slate-600 transition-all duration-300 text-left w-full group-hover:transform group-hover:-translate-y-1"
+                    className="portfolio-title text-lg font-medium text-slate-900 mb-4 hover:text-slate-600 transition-all duration-300 text-left w-full group-hover:transform group-hover:-translate-y-1"
                   >
                     {project.title}
                   </button>
                   
-                  <p className="text-slate-600 mb-4 leading-relaxed transform group-hover:-translate-y-1 transition-transform duration-300 delay-75">
+                  <p className="text-slate-600 mb-6 leading-relaxed transform group-hover:-translate-y-1 transition-transform duration-300 delay-75">
                     {project.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2 transform group-hover:-translate-y-1 transition-transform duration-300 delay-100">
+                  <div className="flex flex-wrap gap-2 mb-6 transform group-hover:-translate-y-1 transition-transform duration-300 delay-100">
                     {project.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="portfolio-tag px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium hover:bg-slate-200 hover:scale-105 transition-all duration-200"
+                        className="portfolio-tag px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full text-xs font-medium hover:bg-slate-200 hover:scale-105 transition-all duration-200"
                         style={{ animationDelay: `${tagIndex * 0.1}s` }}
                       >
                         {tag}
@@ -397,7 +397,7 @@ const Portfolio = () => {
                   </div>
 
                   {/* Date and Role Info */}
-                  <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-150">
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-150">
                     <span className="flex items-center gap-1">
                       <Calendar size={12} />
                       {project.date}
