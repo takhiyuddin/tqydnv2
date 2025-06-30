@@ -37,7 +37,7 @@ const Header = () => {
     { href: '#experience', label: 'Experience', icon: <Briefcase size={16} /> },
     { href: '#skills', label: 'Skills', icon: <Sparkles size={16} /> },
     { href: '#achievements', label: 'Achievements', icon: <Trophy size={16} /> },
-    { href: '#portfolio', label: 'Portfolio', icon: <Layout size={16} /> },
+    { href: '#portfolio', label: 'Projects', icon: <Layout size={16} /> },
     { href: '#contact', label: 'Contact', icon: <Mail size={16} /> },
   ];
 
