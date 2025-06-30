@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import { BookOpen, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { BookOpen, Calendar } from 'lucide-react';
 
 import LogoAmikom from '../assets/logo-amikom.svg';
 import LogoSMAN1Teras from '../assets/logo-sman1teras.svg';
 import LogoNgruki from '../assets/logo-ngruki.svg';
 
-// Define interface for education history items
 interface EducationItem {
   institution: string;
   logo: JSX.Element;
@@ -19,7 +18,6 @@ interface EducationItem {
 
 const Education = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,10 +42,6 @@ const Education = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const toggleDropdown = (index: number) => {
-    setOpenDropdown(openDropdown === index ? null : index);
-  };
 
   const educationHistory: EducationItem[] = [
     {
@@ -75,7 +69,7 @@ const Education = () => {
         'Participated in Festival dan Lomba Seni Siswa Nasional 2024 (Short Film Competition)',
         'Participated in Tantangan Inovasi Siswa SMA - Direktorat SMA 2025 (Short Film Competition)',
         'Participated in Musyawarah Guru Mata Pelajaran Bahasa Indonesia 2025 (Short Film Competition)',
-        'Contributed as Video Editor for Sekolah Sehat SMA Negeri 1 Teras initiative',
+        'Contributed as Video Editor for Sekolah Sehat initiative',
         'Contributed as Video Editor for Project P5 Bangunlah Jiwa & Raganya',
         'Contributed as Video Editor for Duta Wisata Boyolali Regency 2024',
         'Assisted in editing videos for teacher projects, including creative video competitions and Aksi Nyata',
@@ -147,26 +141,14 @@ const Education = () => {
 
                 {education.achievements.length > 0 && (
                   <div>
-                    <button
-                      onClick={() => toggleDropdown(index)}
-                      className="flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium"
-                    >
-                      View Achievements
-                      {openDropdown === index ? (
-                        <ChevronUp size={16} />
-                      ) : (
-                        <ChevronDown size={16} />
-                      )}
-                    </button>
-                    {openDropdown === index && (
-                      <ul
-                        className="mt-4 list-disc list-inside text-slate-600 dropdown-animation"
-                      >
-                        {education.achievements.map((achievement, idx: number) => (
-                          <li key={idx} className="mb-2">{achievement}</li>
-                        ))}
-                      </ul>
-                    )}
+                    <div className="flex items-center gap-2 text-blue-600 font-medium mb-2">
+                      <span>Achievements</span>
+                    </div>
+                    <ul className="list-disc list-inside text-slate-600 dropdown-animation">
+                      {education.achievements.map((achievement, idx: number) => (
+                        <li key={idx} className="mb-2">{achievement}</li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>
