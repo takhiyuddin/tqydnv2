@@ -75,7 +75,7 @@ const Education = () => {
         'Participated in Festival dan Lomba Seni Siswa Nasional 2024 (Short Film Competition)',
         'Participated in Tantangan Inovasi Siswa SMA - Direktorat SMA 2025 (Short Film Competition)',
         'Participated in Musyawarah Guru Mata Pelajaran Bahasa Indonesia 2025 (Short Film Competition)',
-        'Contributed as Video Editor for Sekolah Sehat initiative',
+        'Contributed as Video Editor for Sekolah Sehat SMA Negeri 1 Teras initiative',
         'Contributed as Video Editor for Project P5 Bangunlah Jiwa & Raganya',
         'Contributed as Video Editor for Duta Wisata Boyolali Regency 2024',
         'Assisted in editing videos for teacher projects, including creative video competitions and Aksi Nyata',
