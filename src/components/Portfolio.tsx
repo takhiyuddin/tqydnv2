@@ -31,8 +31,10 @@ interface Project {
 
 const Portfolio = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,17 +60,74 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Handle modal scroll animations
+  useEffect(() => {
+    if (!isPopupOpen || !modalRef.current) return;
+
+    const modalContent = modalRef.current.querySelector('.modal-content');
+    if (!modalContent) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-in');
+          }
+        });
+      },
+      { threshold: 0.1, root: modalContent }
+    );
+
+    const sections = modalContent.querySelectorAll('.blog-section');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [isPopupOpen]);
+
   const handleOpenBlog = (project: Project) => {
+    setIsAnimating(true);
     setSelectedProject(project);
-    setIsPopupOpen(true);
-    document.body.style.overflow = 'hidden';
+    
+    // Trigger opening animation
+    setTimeout(() => {
+      setIsPopupOpen(true);
+      document.body.style.overflow = 'hidden';
+      
+      // Reset animation state after opening
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 300);
+    }, 50);
   };
 
   const handleCloseBlog = () => {
-    setIsPopupOpen(false);
-    setSelectedProject(null);
-    document.body.style.overflow = 'unset';
+    setIsAnimating(true);
+    
+    // Trigger closing animation
+    const modal = modalRef.current;
+    if (modal) {
+      modal.classList.add('animate-modal-close');
+    }
+    
+    setTimeout(() => {
+      setIsPopupOpen(false);
+      setSelectedProject(null);
+      document.body.style.overflow = 'unset';
+      setIsAnimating(false);
+    }, 300);
   };
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isPopupOpen) {
+        handleCloseBlog();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isPopupOpen]);
 
   const projects: Project[] = [
     {
@@ -337,46 +396,38 @@ const Portfolio = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="bg-white border border-slate-200 rounded-lg overflow-hidden card-hover scale-in-on-scroll group"
+                className="bg-white border border-slate-200 rounded-lg overflow-hidden card-hover scale-in-on-scroll group transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    {project.type === 'video' ? (
-                      <button
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-all duration-200"
-                        onClick={() => handleOpenBlog(project)}
-                      >
-                        <Play size={20} />
-                      </button>
-                    ) : (
-                      <button
-                        className="p-3 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-all duration-200"
-                        onClick={() => handleOpenBlog(project)}
-                      >
-                        <Eye size={20} />
-                      </button>
-                    )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                    <button
+                      onClick={() => handleOpenBlog(project)}
+                      className="p-4 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-all duration-200 transform hover:scale-110 animate-pulse-slow"
+                    >
+                      {project.type === 'video' ? <Play size={24} /> : <Eye size={24} />}
+                    </button>
                   </div>
                 </div>
 
                 <div className="p-6">
                   <button
                     onClick={() => handleOpenBlog(project)}
-                    className="text-lg font-medium text-slate-900 mb-3 hover:text-slate-600 transition-colors duration-200 text-left w-full"
+                    className="text-lg font-medium text-slate-900 mb-3 hover:text-slate-600 transition-all duration-200 text-left w-full group-hover:text-blue-600 transform hover:translate-x-1"
                   >
                     {project.title}
                   </button>
-                  <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
+                  <p className="text-slate-600 mb-4 leading-relaxed line-clamp-3">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium"
+                        className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium transition-all duration-200 hover:bg-slate-200 transform hover:scale-105"
                       >
                         {tag}
                       </span>
@@ -389,19 +440,25 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Blog-Style Pop-up */}
+      {/* Enhanced Blog-Style Pop-up with Animations */}
       {isPopupOpen && selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            {/* Header */}
-            <div className="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between">
+        <div 
+          ref={modalRef}
+          className={`fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto transition-all duration-300 ${
+            isAnimating ? 'animate-modal-open' : ''
+          }`}
+          onClick={(e) => e.target === e.currentTarget && handleCloseBlog()}
+        >
+          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transform transition-all duration-300 animate-modal-content-open">
+            {/* Enhanced Header with Animation */}
+            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-6 flex items-center justify-between z-10 animate-slide-down">
               <div className="flex items-center gap-4">
-                <div className="p-2 bg-slate-100 rounded-lg">
+                <div className="p-2 bg-slate-100 rounded-lg transform transition-all duration-200 hover:scale-110">
                   {selectedProject.type === 'video' ? <Play size={20} /> : <Globe size={20} />}
                 </div>
                 <div>
-                  <h2 className="text-2xl font-semibold text-slate-900">{selectedProject.title}</h2>
-                  <div className="flex items-center gap-4 text-sm text-slate-500 mt-1">
+                  <h2 className="text-2xl font-semibold text-slate-900 animate-fade-in-up">{selectedProject.title}</h2>
+                  <div className="flex items-center gap-4 text-sm text-slate-500 mt-1 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                     <div className="flex items-center gap-1">
                       <Calendar size={14} />
                       <span>{selectedProject.date}</span>
@@ -415,20 +472,20 @@ const Portfolio = () => {
               </div>
               <button
                 onClick={handleCloseBlog}
-                className="p-2 hover:bg-slate-100 rounded-lg transition-colors duration-200"
+                className="p-2 hover:bg-slate-100 rounded-lg transition-all duration-200 transform hover:scale-110 hover:rotate-90"
               >
                 <X size={24} />
               </button>
             </div>
 
-            {/* Content */}
-            <div className="p-6 space-y-8">
-              {/* Featured Image/Video */}
-              <div className="w-full">
+            {/* Scrollable Content with Animations */}
+            <div className="modal-content overflow-y-auto max-h-[calc(90vh-80px)] p-6 space-y-8">
+              {/* Featured Image/Video with Animation */}
+              <div className="w-full blog-section animate-fade-in-up">
                 {selectedProject.type === 'video' && selectedProject.youtubeId ? (
-                  <div className="aspect-video w-full">
+                  <div className="aspect-video w-full transform transition-all duration-300 hover:scale-105">
                     <iframe
-                      className="w-full h-full rounded-lg"
+                      className="w-full h-full rounded-lg shadow-lg"
                       src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
                       title={selectedProject.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -439,17 +496,18 @@ const Portfolio = () => {
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.title}
-                    className="w-full h-64 object-cover rounded-lg"
+                    className="w-full h-64 object-cover rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105"
                   />
                 )}
               </div>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
+              {/* Animated Tags */}
+              <div className="flex flex-wrap gap-2 blog-section">
                 {selectedProject.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="flex items-center gap-1 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                    className="flex items-center gap-1 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium transform transition-all duration-200 hover:scale-105 hover:bg-slate-200 animate-fade-in-up"
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <Tag size={12} />
                     {tag}
@@ -457,28 +515,32 @@ const Portfolio = () => {
                 ))}
               </div>
 
-              {/* Blog Content */}
+              {/* Blog Content with Staggered Animations */}
               <article className="prose prose-slate max-w-none">
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Project Overview</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.overview}</p>
+                <section className="mb-8 blog-section">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 animate-fade-in-left">Project Overview</h3>
+                  <p className="text-slate-600 leading-relaxed animate-fade-in-up">{selectedProject.blogContent.overview}</p>
                 </section>
 
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">The Challenge</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.challenge}</p>
+                <section className="mb-8 blog-section">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 animate-fade-in-left">The Challenge</h3>
+                  <p className="text-slate-600 leading-relaxed animate-fade-in-up">{selectedProject.blogContent.challenge}</p>
                 </section>
 
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">The Solution</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.solution}</p>
+                <section className="mb-8 blog-section">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 animate-fade-in-left">The Solution</h3>
+                  <p className="text-slate-600 leading-relaxed animate-fade-in-up">{selectedProject.blogContent.solution}</p>
                 </section>
 
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Features</h3>
+                <section className="mb-8 blog-section">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 animate-fade-in-left">Key Features</h3>
                   <ul className="space-y-2">
                     {selectedProject.blogContent.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                      <li 
+                        key={index} 
+                        className="flex items-start gap-3 animate-fade-in-up transform transition-all duration-200 hover:translate-x-2"
+                        style={{ animationDelay: `${index * 0.05}s` }}
+                      >
                         <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-slate-600 leading-relaxed">{feature}</span>
                       </li>
@@ -486,11 +548,15 @@ const Portfolio = () => {
                   </ul>
                 </section>
 
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Technologies Used</h3>
+                <section className="mb-8 blog-section">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 animate-fade-in-left">Technologies Used</h3>
                   <ul className="space-y-2">
                     {selectedProject.blogContent.technologies.map((tech, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                      <li 
+                        key={index} 
+                        className="flex items-start gap-3 animate-fade-in-up transform transition-all duration-200 hover:translate-x-2"
+                        style={{ animationDelay: `${index * 0.05}s` }}
+                      >
                         <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-slate-600 leading-relaxed">{tech}</span>
                       </li>
@@ -498,16 +564,20 @@ const Portfolio = () => {
                   </ul>
                 </section>
 
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Outcome & Results</h3>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.outcome}</p>
+                <section className="mb-8 blog-section">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 animate-fade-in-left">Outcome & Results</h3>
+                  <p className="text-slate-600 leading-relaxed animate-fade-in-up">{selectedProject.blogContent.outcome}</p>
                 </section>
 
-                <section className="mb-8">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Learnings</h3>
+                <section className="mb-8 blog-section">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-4 animate-fade-in-left">Key Learnings</h3>
                   <ul className="space-y-2">
                     {selectedProject.blogContent.lessons.map((lesson, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                      <li 
+                        key={index} 
+                        className="flex items-start gap-3 animate-fade-in-up transform transition-all duration-200 hover:translate-x-2"
+                        style={{ animationDelay: `${index * 0.05}s` }}
+                      >
                         <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-slate-600 leading-relaxed">{lesson}</span>
                       </li>
@@ -516,14 +586,14 @@ const Portfolio = () => {
                 </section>
               </article>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200">
+              {/* Animated Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200 blog-section">
                 {selectedProject.type === 'video' && selectedProject.youtubeId && (
                   <a
                     href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200"
+                    className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-all duration-200 transform hover:scale-105 hover:shadow-lg animate-fade-in-up"
                   >
                     <Play size={16} />
                     Watch on YouTube
@@ -534,7 +604,8 @@ const Portfolio = () => {
                     href={selectedProject.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors duration-200"
+                    className="flex items-center justify-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg animate-fade-in-up"
+                    style={{ animationDelay: '0.1s' }}
                   >
                     <ExternalLink size={16} />
                     Visit Website
@@ -542,7 +613,8 @@ const Portfolio = () => {
                 )}
                 <button
                   onClick={handleCloseBlog}
-                  className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200"
+                  className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200 transform hover:scale-105 animate-fade-in-up"
+                  style={{ animationDelay: '0.2s' }}
                 >
                   Close
                 </button>
@@ -551,6 +623,133 @@ const Portfolio = () => {
           </div>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes modal-open {
+          from {
+            opacity: 0;
+            backdrop-filter: blur(0px);
+          }
+          to {
+            opacity: 1;
+            backdrop-filter: blur(8px);
+          }
+        }
+
+        @keyframes modal-content-open {
+          from {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        @keyframes modal-close {
+          from {
+            opacity: 1;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+        }
+
+        @keyframes slide-down {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in-left {
+          from {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slide-in {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes pulse-slow {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+        }
+
+        .animate-modal-open {
+          animation: modal-open 0.3s ease-out;
+        }
+
+        .animate-modal-content-open {
+          animation: modal-content-open 0.3s ease-out;
+        }
+
+        .animate-modal-close {
+          animation: modal-close 0.3s ease-out;
+        }
+
+        .animate-slide-down {
+          animation: slide-down 0.4s ease-out;
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.6s ease-out;
+        }
+
+        .animate-fade-in-left {
+          animation: fade-in-left 0.6s ease-out;
+        }
+
+        .animate-slide-in {
+          animation: slide-in 0.6s ease-out;
+        }
+
+        .animate-pulse-slow {
+          animation: pulse-slow 2s ease-in-out infinite;
+        }
+
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
     </section>
   );
 };
