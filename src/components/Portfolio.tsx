@@ -63,7 +63,10 @@ const Portfolio = () => {
     setSelectedProject(project);
     setIsPopupOpen(true);
     setIsAnimating(true);
+    
+    // Add blur effect to body
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-blur-active');
     
     // Trigger content animations after modal opens
     setTimeout(() => {
@@ -78,6 +81,10 @@ const Portfolio = () => {
 
   const handleCloseBlog = () => {
     setIsAnimating(false);
+    
+    // Remove blur effect from body
+    document.body.classList.remove('modal-blur-active');
+    
     setTimeout(() => {
       setIsPopupOpen(false);
       setSelectedProject(null);
@@ -397,22 +404,30 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Animated Blog-Style Pop-up */}
+      {/* Animated Blog-Style Pop-up with Blur Background */}
       {isPopupOpen && selectedProject && (
         <div 
-          className={`fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4 overflow-y-auto transition-all duration-300 ${
+          className={`fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto transition-all duration-500 ${
             isAnimating ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{
+            background: 'rgba(0, 0, 0, 0.8)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+          }}
         >
           <div 
-            className={`bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all duration-500 ${
+            className={`bg-white/95 backdrop-blur-xl rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-white/20 transform transition-all duration-700 ${
               isAnimating ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-8 opacity-0'
             }`}
+            style={{
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+            }}
           >
-            {/* Animated Header */}
-            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-6 flex items-center justify-between">
+            {/* Animated Header with Glass Effect */}
+            <div className="sticky top-0 bg-white/90 backdrop-blur-xl border-b border-white/20 p-6 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="p-2 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg transform hover:scale-110 transition-transform duration-200">
+                <div className="p-2 bg-gradient-to-br from-blue-100/80 to-purple-100/80 backdrop-blur-sm rounded-lg transform hover:scale-110 transition-transform duration-200 border border-white/30">
                   {selectedProject.type === 'video' ? 
                     <Play size={20} className="text-blue-600" /> : 
                     <Globe size={20} className="text-purple-600" />
@@ -436,18 +451,18 @@ const Portfolio = () => {
               </div>
               <button
                 onClick={handleCloseBlog}
-                className="p-2 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all duration-200 transform hover:scale-110"
+                className="p-2 hover:bg-red-50/80 hover:text-red-600 rounded-lg transition-all duration-200 transform hover:scale-110 backdrop-blur-sm border border-transparent hover:border-red-200/50"
               >
                 <X size={24} />
               </button>
             </div>
 
-            {/* Animated Content */}
+            {/* Animated Content with Glass Effect */}
             <div className="p-6 space-y-8">
               {/* Featured Image/Video with Animation */}
               <div className="w-full blog-section opacity-0 transform translate-y-4 transition-all duration-700">
                 {selectedProject.type === 'video' && selectedProject.youtubeId ? (
-                  <div className="aspect-video w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="aspect-video w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-white/20">
                     <iframe
                       className="w-full h-full"
                       src={`https://www.youtube.com/embed/${selectedProject.youtubeId}`}
@@ -460,17 +475,17 @@ const Portfolio = () => {
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.title}
-                    className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+                    className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border border-white/20"
                   />
                 )}
               </div>
 
-              {/* Animated Tags */}
+              {/* Animated Tags with Glass Effect */}
               <div className="flex flex-wrap gap-2 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
                 {selectedProject.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full text-sm font-medium hover:from-blue-100 hover:to-purple-100 hover:text-blue-700 transition-all duration-300 transform hover:scale-105"
+                    className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-slate-100/80 to-slate-200/80 backdrop-blur-sm text-slate-700 rounded-full text-sm font-medium hover:from-blue-100/80 hover:to-purple-100/80 hover:text-blue-700 transition-all duration-300 transform hover:scale-105 border border-white/30"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <Tag size={12} />
@@ -479,30 +494,30 @@ const Portfolio = () => {
                 ))}
               </div>
 
-              {/* Animated Blog Content */}
+              {/* Animated Blog Content with Glass Cards */}
               <article className="prose prose-slate max-w-none">
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700 p-6 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
                     Project Overview
                   </h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.overview}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700 p-6 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
                     The Challenge
                   </h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.challenge}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700 p-6 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
                     The Solution
                   </h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.solution}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700 p-6 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
                     Key Features
                   </h3>
@@ -510,7 +525,7 @@ const Portfolio = () => {
                     {selectedProject.blogContent.features.map((feature, index) => (
                       <li 
                         key={index} 
-                        className="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+                        className="flex items-start gap-3 hover:bg-white/30 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -520,7 +535,7 @@ const Portfolio = () => {
                   </ul>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700 p-6 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
                     Technologies Used
                   </h3>
@@ -528,7 +543,7 @@ const Portfolio = () => {
                     {selectedProject.blogContent.technologies.map((tech, index) => (
                       <li 
                         key={index} 
-                        className="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+                        className="flex items-start gap-3 hover:bg-white/30 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <div className="w-1.5 h-1.5 bg-gradient-to-r from-green-400 to-blue-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -538,14 +553,14 @@ const Portfolio = () => {
                   </ul>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700 p-6 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
                     Outcome & Results
                   </h3>
                   <p className="text-slate-600 leading-relaxed">{selectedProject.blogContent.outcome}</p>
                 </section>
 
-                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+                <section className="mb-8 blog-section opacity-0 transform translate-y-4 transition-all duration-700 p-6 bg-white/40 backdrop-blur-sm rounded-lg border border-white/30">
                   <h3 className="text-xl font-semibold text-slate-900 mb-4 hover:text-blue-600 transition-colors duration-200">
                     Key Learnings
                   </h3>
@@ -553,7 +568,7 @@ const Portfolio = () => {
                     {selectedProject.blogContent.lessons.map((lesson, index) => (
                       <li 
                         key={index} 
-                        className="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+                        className="flex items-start gap-3 hover:bg-white/30 p-2 rounded-lg transition-all duration-200 transform hover:translate-x-2"
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <div className="w-1.5 h-1.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -564,14 +579,14 @@ const Portfolio = () => {
                 </section>
               </article>
 
-              {/* Animated Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-200 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
+              {/* Animated Action Buttons with Glass Effect */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/20 blog-section opacity-0 transform translate-y-4 transition-all duration-700">
                 {selectedProject.type === 'video' && selectedProject.youtubeId && (
                   <a
                     href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-lg font-medium hover:from-red-700 hover:to-red-800 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600/90 to-red-700/90 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-medium hover:from-red-700/90 hover:to-red-800/90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg border border-white/20"
                   >
                     <Play size={16} />
                     Watch on YouTube
@@ -582,7 +597,7 @@ const Portfolio = () => {
                     href={selectedProject.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-slate-900 to-slate-800 text-white px-6 py-3 rounded-lg font-medium hover:from-slate-800 hover:to-slate-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-slate-900/90 to-slate-800/90 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-medium hover:from-slate-800/90 hover:to-slate-700/90 transition-all duration-300 transform hover:scale-105 hover:shadow-lg border border-white/20"
                   >
                     <ExternalLink size={16} />
                     Visit Website
@@ -590,7 +605,7 @@ const Portfolio = () => {
                 )}
                 <button
                   onClick={handleCloseBlog}
-                  className="flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-300 transform hover:scale-105"
+                  className="flex items-center justify-center gap-2 border border-slate-300/50 bg-white/50 backdrop-blur-sm text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400/50 hover:bg-white/70 transition-all duration-300 transform hover:scale-105"
                 >
                   Close
                 </button>
@@ -604,6 +619,21 @@ const Portfolio = () => {
         .blog-section.animate-in {
           opacity: 1 !important;
           transform: translateY(0) !important;
+        }
+        
+        /* Global blur effect for body when modal is active */
+        :global(body.modal-blur-active) {
+          overflow: hidden;
+        }
+        
+        :global(body.modal-blur-active > div:not(.fixed)) {
+          filter: blur(8px);
+          transition: filter 0.3s ease-out;
+        }
+        
+        :global(body.modal-blur-active #root > *:not(.fixed)) {
+          filter: blur(8px);
+          transition: filter 0.3s ease-out;
         }
       `}</style>
     </section>
