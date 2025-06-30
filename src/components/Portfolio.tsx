@@ -351,7 +351,7 @@ const Portfolio = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
             <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-              Portfolio Showcase
+              Recent Projects
             </h2>
           </div>
 
