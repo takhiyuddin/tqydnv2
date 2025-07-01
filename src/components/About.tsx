@@ -59,10 +59,6 @@ const About = () => {
                   <div className="p-3 bg-slate-100 rounded-lg">
                     <MapPin className="text-slate-600" size={20} />
                   </div>
-                  <div>
-                    <h4 className="font-medium text-slate-900 mb-1">Location</h4>
-                    <p className="text-slate-600">Boyolali, Indonesia</p>
-                  </div>
                 </div>
               </div>
 
