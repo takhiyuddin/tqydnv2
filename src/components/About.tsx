@@ -39,7 +39,6 @@ const About = () => {
             <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               About Me
             </h2>
-          </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="slide-in-left-on-scroll">
