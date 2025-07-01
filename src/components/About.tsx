@@ -52,25 +52,6 @@ const About = () => {
                 Outside of development, I’m always learning — exploring emerging technologies, contributing to creative initiatives, and sharing insights with the tech community. I’m driven by the belief that technology, when used thoughtfully, can create meaningful impact and lasting value.
               </p>
             </div>
-
-            <div className="space-y-6 slide-in-right-on-scroll">
-              <div className="bg-white p-6 rounded-lg border border-slate-200 card-hover">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-100 rounded-lg">
-                    <MapPin className="text-slate-600" size={20} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg border border-slate-200 card-hover">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-100 rounded-lg">
-                    <Mail className="text-slate-600" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-slate-900 mb-1">Email</h4>
-                    <p className="text-slate-600">afiftqydns@gmail.com</p>
-                  </div>
                 </div>
               </div>
             </div>
