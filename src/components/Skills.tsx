@@ -75,13 +75,13 @@ const Skills = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="skills" className="py-24 bg-slate-900 relative">
+    <section ref={sectionRef} id="skills" className="py-24 bg-white relative">
       <div className="section-divider absolute top-0 left-0 right-0"></div>
       
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               Skills & Expertise
             </h2>
           </div>
@@ -90,30 +90,30 @@ const Skills = () => {
             {skillCategories.map((category, categoryIndex) => (
               <div
                 key={categoryIndex}
-                className="bg-slate-800 border border-slate-700 rounded-lg p-8 card-hover scale-in-on-scroll"
+                className="bg-white border border-slate-200 rounded-lg p-8 card-hover scale-in-on-scroll"
                 style={{ animationDelay: `${categoryIndex * 0.15}s` }}
               >
                 <div className="text-center mb-8">
-                  <div className="p-4 bg-slate-700 rounded-lg w-fit mx-auto mb-4">
-                    <category.icon className="text-slate-300" size={32} />
+                  <div className="p-4 bg-slate-100 rounded-lg w-fit mx-auto mb-4">
+                    <category.icon className="text-slate-600" size={32} />
                   </div>
-                  <h3 className="text-xl font-medium text-white mb-3">
+                  <h3 className="text-xl font-medium text-slate-900 mb-3">
                     {category.title}
                   </h3>
-                  <p className="text-slate-300 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed">
                     {category.description}
                   </p>
                 </div>
                 
                 <div className="space-y-4">
-                  <h4 className="font-medium text-white">
+                  <h4 className="font-medium text-slate-900">
                     Core Competencies:
                   </h4>
                   <ul className="space-y-3">
                     {category.skills.map((skill, skillIndex) => (
                       <li key={skillIndex} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-slate-300 leading-relaxed text-sm">
+                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-slate-600 leading-relaxed text-sm">
                           {skill}
                         </span>
                       </li>

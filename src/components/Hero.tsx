@@ -51,20 +51,20 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center bg-slate-900 relative"
+      className="min-h-screen flex items-center justify-center bg-white relative"
     >
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto pt-20">
           <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-light text-white mb-6 tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-light text-slate-900 mb-6 tracking-tight">
               <span className="font-medium">
                 {displayedText}
                 {showCursor && (
-                  <span className="animate-pulse border-r-2 border-blue-400 ml-1"></span>
+                  <span className="animate-pulse border-r-2 border-slate-900 ml-1"></span>
                 )}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 mb-12 font-light animate-fade-in-delayed">
+            <p className="text-xl md:text-2xl text-slate-600 mb-12 font-light animate-fade-in-delayed">
               Web Developer
             </p>
           </div>
@@ -76,7 +76,7 @@ const Hero = () => {
             </button>
             <button
               onClick={scrollToContact}
-              className="border border-slate-600 text-slate-300 px-8 py-3 rounded-lg font-medium hover:border-slate-500 hover:bg-slate-800 transition-all duration-200 flex items-center gap-2 text-sm"
+              className="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200 flex items-center gap-2 text-sm"
             >
               <Mail size={16} />
               Get in Touch
@@ -85,7 +85,7 @@ const Hero = () => {
 
           <button
             onClick={scrollToAbout}
-            className="text-slate-400 hover:text-slate-300 transition-colors duration-200 animate-bounce"
+            className="text-slate-400 hover:text-slate-600 transition-colors duration-200 animate-bounce"
           >
             <ChevronDown size={24} />
           </button>

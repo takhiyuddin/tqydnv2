@@ -56,13 +56,13 @@ const Contact = () => {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 bg-slate-800 relative">
+    <section ref={sectionRef} id="contact" className="py-24 bg-slate-50 relative">
       <div className="section-divider absolute top-0 left-0 right-0"></div>
       
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               Contact Me
             </h2>
           </div>
@@ -70,10 +70,10 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div className="slide-in-left-on-scroll">
-              <h3 className="text-2xl font-medium text-white mb-6">
+              <h3 className="text-2xl font-medium text-slate-900 mb-6">
                 Let's Work Together
               </h3>
-              <p className="text-slate-300 leading-relaxed mb-8 text-lg">
+              <p className="text-slate-600 leading-relaxed mb-8 text-lg">
                 I'm always excited to take on new projects and collaborate with 
                 great people. Whether you need a website, video editing services, 
                 or just want to say hi, I'd love to hear from you!
@@ -81,38 +81,38 @@ const Contact = () => {
               
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-700 rounded-lg border border-slate-600">
-                    <Mail className="text-slate-300" size={20} />
+                  <div className="p-3 bg-white rounded-lg border border-slate-200">
+                    <Mail className="text-slate-600" size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-white">Email</p>
-                    <p className="text-slate-300">afiftqydns@gmail.com</p>
+                    <p className="font-medium text-slate-900">Email</p>
+                    <p className="text-slate-600">afiftqydns@gmail.com</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-700 rounded-lg border border-slate-600">
-                    <MapPin className="text-slate-300" size={20} />
+                  <div className="p-3 bg-white rounded-lg border border-slate-200">
+                    <MapPin className="text-slate-600" size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-white">Location</p>
-                    <p className="text-slate-300">Boyolali, Indonesia</p>
+                    <p className="font-medium text-slate-900">Location</p>
+                    <p className="text-slate-600">Boyolali, Indonesia</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="bg-slate-700 border border-slate-600 rounded-lg p-8 slide-in-right-on-scroll">
+            <div className="bg-white border border-slate-200 rounded-lg p-8 slide-in-right-on-scroll">
               {isSubmitted ? (
                 <div className="text-center py-12">
-                  <div className="p-4 bg-green-500/20 rounded-lg w-fit mx-auto mb-6">
-                    <CheckCircle className="text-green-400" size={32} />
+                  <div className="p-4 bg-green-100 rounded-lg w-fit mx-auto mb-6">
+                    <CheckCircle className="text-green-600" size={32} />
                   </div>
-                  <h3 className="text-2xl font-medium text-white mb-4">
+                  <h3 className="text-2xl font-medium text-slate-900 mb-4">
                     Message Sent!
                   </h3>
-                  <p className="text-slate-300">
+                  <p className="text-slate-600">
                     Thank you for reaching out. I'll get back to you soon!
                   </p>
                 </div>
@@ -120,7 +120,7 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-slate-900 mb-2">
                         Name
                       </label>
                       <input
@@ -130,12 +130,12 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 text-white bg-slate-800"
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-slate-500 focus:ring-1 focus:ring-slate-500 transition-all duration-200 text-slate-900"
                         placeholder="Your name"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-slate-900 mb-2">
                         Email
                       </label>
                       <input
@@ -145,14 +145,14 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 text-white bg-slate-800"
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-slate-500 focus:ring-1 focus:ring-slate-500 transition-all duration-200 text-slate-900"
                         placeholder="your@email.com"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="subject" className="block text-sm font-medium text-slate-900 mb-2">
                       Subject
                     </label>
                     <input
@@ -162,13 +162,13 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 text-white bg-slate-800"
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-slate-500 focus:ring-1 focus:ring-slate-500 transition-all duration-200 text-slate-900"
                       placeholder="What's this about?"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-slate-900 mb-2">
                       Message
                     </label>
                     <textarea
@@ -178,7 +178,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 border border-slate-600 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 text-white bg-slate-800 resize-none"
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:border-slate-500 focus:ring-1 focus:ring-slate-500 transition-all duration-200 text-slate-900 resize-none"
                       placeholder="Tell me about your project..."
                     ></textarea>
                   </div>

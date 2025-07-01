@@ -62,28 +62,28 @@ const Experience = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="experience" className="py-24 bg-slate-800 relative">
+    <section ref={sectionRef} id="experience" className="py-24 bg-slate-50 relative">
       <div className="section-divider absolute top-0 left-0 right-0"></div>
       
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               Work Experience
             </h2>
           </div>
           
-          <div className="bg-slate-700 border border-slate-600 rounded-lg p-8 mb-12 scale-in-on-scroll">
+          <div className="bg-white border border-slate-200 rounded-lg p-8 mb-12 scale-in-on-scroll">
             <div className="text-center">
               <div className="flex justify-center mb-6">
-                <div className="p-4 bg-slate-600 rounded-lg">
-                  <Briefcase className="text-slate-300" size={32} />
+                <div className="p-4 bg-slate-100 rounded-lg">
+                  <Briefcase className="text-slate-600" size={32} />
                 </div>
               </div>
-              <h3 className="text-2xl font-medium text-white mb-4">
+              <h3 className="text-2xl font-medium text-slate-900 mb-4">
                 Remote Web Developer
               </h3>
-              <p className="text-lg text-slate-300 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
                 I work remotely as a full-stack web developer, specializing in creating 
                 beautiful and functional websites and applications. Additionally, I provide 
                 professional video editing services for various clients and projects.
@@ -95,16 +95,16 @@ const Experience = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-slate-700 border border-slate-600 rounded-lg p-6 card-hover scale-in-on-scroll"
+                className="bg-white border border-slate-200 rounded-lg p-6 card-hover scale-in-on-scroll"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="p-3 bg-slate-600 rounded-lg w-fit mb-4">
-                  <service.icon className="text-slate-300" size={24} />
+                <div className="p-3 bg-slate-100 rounded-lg w-fit mb-4">
+                  <service.icon className="text-slate-600" size={24} />
                 </div>
-                <h4 className="text-lg font-medium text-white mb-3">
+                <h4 className="text-lg font-medium text-slate-900 mb-3">
                   {service.title}
                 </h4>
-                <p className="text-slate-300 leading-relaxed">
+                <p className="text-slate-600 leading-relaxed">
                   {service.description}
                 </p>
               </div>

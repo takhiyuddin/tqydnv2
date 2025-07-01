@@ -346,11 +346,11 @@ const Portfolio = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="portfolio" className="py-24 bg-slate-900 relative">
+    <section ref={sectionRef} id="portfolio" className="py-24 bg-white relative">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               Recent Projects
             </h2>
           </div>
@@ -359,7 +359,7 @@ const Portfolio = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="portfolio-card bg-slate-800 border border-slate-700 rounded-lg overflow-hidden scale-in-on-scroll group"
+                className="portfolio-card bg-white border border-slate-200 rounded-lg overflow-hidden scale-in-on-scroll group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative overflow-hidden">
@@ -379,7 +379,7 @@ const Portfolio = () => {
                     </div>
                   </div>
                   
-                  {/* Type Badge */}
+                  {/* Static Floating Type Badge - No Animation */}
                   <div className="absolute top-4 right-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md ${
                       project.type === 'video' 
@@ -393,16 +393,16 @@ const Portfolio = () => {
 
                 <div className="p-6 relative">
                   {/* Animated Border */}
-                  <div className="absolute top-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 group-hover:w-full transition-all duration-500"></div>
+                  <div className="absolute top-0 left-0 w-0 h-0.5 bg-gradient-to-r from-slate-400 to-slate-600 group-hover:w-full transition-all duration-500"></div>
                   
                   <button
                     onClick={() => handleOpenBlog(project)}
-                    className="portfolio-title text-lg font-medium text-white mb-3 hover:text-slate-300 transition-all duration-300 text-left w-full group-hover:transform group-hover:-translate-y-1"
+                    className="portfolio-title text-lg font-medium text-slate-900 mb-3 hover:text-slate-600 transition-all duration-300 text-left w-full group-hover:transform group-hover:-translate-y-1"
                   >
                     {project.title}
                   </button>
                   
-                  <p className="text-slate-300 mb-4 leading-relaxed transform group-hover:-translate-y-1 transition-transform duration-300 delay-75">
+                  <p className="text-slate-600 mb-4 leading-relaxed transform group-hover:-translate-y-1 transition-transform duration-300 delay-75">
                     {project.description}
                   </p>
                   
@@ -410,7 +410,7 @@ const Portfolio = () => {
                     {project.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="portfolio-tag px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-xs font-medium hover:bg-slate-600 hover:scale-105 transition-all duration-200"
+                        className="portfolio-tag px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium hover:bg-slate-200 hover:scale-105 transition-all duration-200"
                         style={{ animationDelay: `${tagIndex * 0.1}s` }}
                       >
                         {tag}
@@ -419,7 +419,7 @@ const Portfolio = () => {
                   </div>
 
                   {/* Date and Role Info */}
-                  <div className="mt-4 pt-4 border-t border-slate-700 flex items-center justify-between text-xs text-slate-400 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-150">
+                  <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-150">
                     <span className="flex items-center gap-1">
                       <Calendar size={12} />
                       {project.date}
@@ -438,28 +438,28 @@ const Portfolio = () => {
 
       {/* Responsive Blog-Style Modal */}
       {isPopupOpen && selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 animate-fade-in">
-          <div className="bg-slate-800 rounded-xl sm:rounded-2xl w-full max-w-5xl max-h-[98vh] sm:max-h-[95vh] shadow-2xl animate-scale-in transform overflow-hidden border border-slate-700">
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 animate-fade-in">
+          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-5xl max-h-[98vh] sm:max-h-[95vh] shadow-2xl animate-scale-in transform overflow-hidden">
             {/* Reading Progress Bar */}
             <div className="absolute top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out z-10"
                  style={{ width: `${readingProgress}%` }}></div>
             
-            {/* Header */}
-            <div className="sticky top-0 bg-slate-800/95 backdrop-blur-md border-b border-slate-700 p-4 sm:p-6 z-10">
+            {/* Responsive Header - Fixed to match Healthy School Project */}
+            <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-4 sm:p-6 z-10">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="relative flex-shrink-0">
-                      <div className="p-2 sm:p-3 bg-slate-700 rounded-lg shadow-sm">
-                        {selectedProject.type === 'video' ? <Play size={20} className="text-slate-300" /> : <Globe size={20} className="text-slate-300" />}
+                      <div className="p-2 sm:p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg shadow-sm">
+                        {selectedProject.type === 'video' ? <Play size={20} className="text-slate-700" /> : <Globe size={20} className="text-slate-700" />}
                       </div>
                       <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h2 className="text-lg sm:text-2xl font-bold text-white mb-1 leading-tight">
+                      <h2 className="text-lg sm:text-2xl font-bold text-slate-900 mb-1 leading-tight">
                         {selectedProject.title}
                       </h2>
-                      <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-slate-400">
+                      <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-slate-500">
                         <div className="flex items-center gap-1">
                           <Calendar size={12} />
                           <span>{selectedProject.date}</span>
@@ -479,9 +479,9 @@ const Portfolio = () => {
                 </div>
                 <button
                   onClick={handleCloseBlog}
-                  className="flex-shrink-0 p-2 sm:p-3 hover:bg-slate-700 rounded-lg transition-all duration-200 hover:rotate-90 transform group"
+                  className="flex-shrink-0 p-2 sm:p-3 hover:bg-slate-100 rounded-lg transition-all duration-200 hover:rotate-90 transform group"
                 >
-                  <X size={20} className="group-hover:text-red-400 transition-colors text-slate-300" />
+                  <X size={20} className="group-hover:text-red-500 transition-colors" />
                 </button>
               </div>
             </div>
@@ -518,7 +518,7 @@ const Portfolio = () => {
                   {selectedProject.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="flex items-center gap-2 px-3 py-1.5 bg-slate-700 text-slate-300 rounded-full text-xs sm:text-sm font-medium hover:bg-slate-600 transition-all duration-300 cursor-default shadow-sm"
+                      className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 rounded-full text-xs sm:text-sm font-medium hover:from-slate-200 hover:to-slate-300 transition-all duration-300 cursor-default shadow-sm"
                     >
                       <Tag size={12} />
                       {tag}
@@ -553,12 +553,12 @@ const Portfolio = () => {
                         <div className={`p-2 bg-gradient-to-r ${section.gradient} rounded-lg text-white shadow-sm`}>
                           {section.icon}
                         </div>
-                        <h3 className="text-base sm:text-lg font-bold text-white">
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900">
                           {section.title}
                         </h3>
                       </div>
-                      <div className="bg-slate-700 p-3 sm:p-4 rounded-lg border border-slate-600 shadow-sm">
-                        <p className="text-slate-300 leading-relaxed text-xs sm:text-sm md:text-base">{section.content}</p>
+                      <div className="bg-gradient-to-r from-slate-50 to-white p-3 sm:p-4 rounded-lg border border-slate-200 shadow-sm">
+                        <p className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{section.content}</p>
                       </div>
                     </section>
                   ))}
@@ -569,16 +569,16 @@ const Portfolio = () => {
                       <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white shadow-sm">
                         <Award size={16} />
                       </div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Key Features</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Key Features</h3>
                     </div>
                     <div className="grid gap-2 sm:gap-3">
                       {selectedProject.blogContent.features.map((feature, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-2 p-2 sm:p-3 bg-slate-700 border border-slate-600 rounded-lg hover:border-slate-500 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 p-2 sm:p-3 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
                           <div className="w-1 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-300 leading-relaxed text-xs sm:text-sm md:text-base">{feature}</span>
+                          <span className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -590,16 +590,16 @@ const Portfolio = () => {
                       <div className="p-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg text-white shadow-sm">
                         <Tag size={16} />
                       </div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Technologies Used</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Technologies Used</h3>
                     </div>
                     <div className="space-y-2 sm:space-y-3">
                       {selectedProject.blogContent.technologies.map((tech, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-700 border border-slate-600 rounded-lg hover:bg-slate-600 hover:border-slate-500 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-lg hover:from-white hover:to-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-300"
                         >
                           <div className="w-1 h-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-300 leading-relaxed font-medium text-xs sm:text-sm md:text-base">{tech}</span>
+                          <span className="text-slate-700 leading-relaxed font-medium text-xs sm:text-sm md:text-base">{tech}</span>
                         </div>
                       ))}
                     </div>
@@ -611,10 +611,10 @@ const Portfolio = () => {
                       <div className="p-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white shadow-sm">
                         <Award size={16} />
                       </div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Outcome & Results</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Outcome & Results</h3>
                     </div>
-                    <div className="bg-slate-700 p-3 sm:p-4 rounded-lg border border-slate-600 shadow-sm">
-                      <p className="text-slate-300 leading-relaxed text-xs sm:text-sm md:text-base">{selectedProject.blogContent.outcome}</p>
+                    <div className="bg-gradient-to-r from-emerald-50 to-teal-50 p-3 sm:p-4 rounded-lg border border-emerald-200 shadow-sm">
+                      <p className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{selectedProject.blogContent.outcome}</p>
                     </div>
                   </section>
 
@@ -624,16 +624,16 @@ const Portfolio = () => {
                       <div className="p-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg text-white shadow-sm">
                         <Award size={16} />
                       </div>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Key Learnings</h3>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">Key Learnings</h3>
                     </div>
                     <div className="space-y-2 sm:space-y-3">
                       {selectedProject.blogContent.lessons.map((lesson, index) => (
                         <div 
                           key={index} 
-                          className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-700 border border-slate-600 rounded-lg hover:bg-slate-600 hover:shadow-md transition-all duration-300"
+                          className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg hover:from-orange-50 hover:to-amber-50 hover:shadow-md transition-all duration-300"
                         >
                           <div className="w-1 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                          <span className="text-slate-300 leading-relaxed text-xs sm:text-sm md:text-base">{lesson}</span>
+                          <span className="text-slate-700 leading-relaxed text-xs sm:text-sm md:text-base">{lesson}</span>
                         </div>
                       ))}
                     </div>
@@ -641,7 +641,7 @@ const Portfolio = () => {
                 </article>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-slate-700">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-slate-200">
                   {selectedProject.type === 'video' && selectedProject.youtubeId && (
                     <a
                       href={`https://www.youtube.com/watch?v=${selectedProject.youtubeId}`}
@@ -658,7 +658,7 @@ const Portfolio = () => {
                       href={selectedProject.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group text-sm sm:text-base"
+                      className="flex items-center justify-center gap-3 bg-gradient-to-r from-slate-900 to-slate-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:from-slate-800 hover:to-slate-700 hover:scale-105 hover:shadow-xl transition-all duration-300 transform group text-sm sm:text-base"
                     >
                       <ExternalLink size={18} className="group-hover:scale-110 transition-transform duration-200" />
                       Visit Website
@@ -666,7 +666,7 @@ const Portfolio = () => {
                   )}
                   <button
                     onClick={handleCloseBlog}
-                    className="flex items-center justify-center gap-3 border-2 border-slate-600 text-slate-300 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:border-slate-500 hover:bg-slate-700 hover:scale-105 transition-all duration-300 transform group text-sm sm:text-base"
+                    className="flex items-center justify-center gap-3 border-2 border-slate-300 text-slate-700 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:border-slate-400 hover:bg-slate-50 hover:scale-105 transition-all duration-300 transform group text-sm sm:text-base"
                   >
                     <X size={18} className="group-hover:rotate-90 transition-transform duration-200" />
                     Close
@@ -685,7 +685,7 @@ const Portfolio = () => {
 
         .portfolio-card:hover {
           transform: translateY(-8px);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
         }
 
         .portfolio-action-btn {
@@ -704,7 +704,7 @@ const Portfolio = () => {
           left: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+          background: linear-gradient(90deg, #64748b, #475569);
           transition: width 0.3s ease;
         }
 
@@ -724,7 +724,7 @@ const Portfolio = () => {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
           transition: left 0.5s;
         }
 
@@ -734,7 +734,7 @@ const Portfolio = () => {
 
         .blog-modal-content {
           scrollbar-width: thin;
-          scrollbar-color: #475569 #1e293b;
+          scrollbar-color: #cbd5e1 #f8fafc;
         }
 
         .blog-modal-content::-webkit-scrollbar {
@@ -742,17 +742,17 @@ const Portfolio = () => {
         }
 
         .blog-modal-content::-webkit-scrollbar-track {
-          background: #1e293b;
+          background: #f8fafc;
           border-radius: 2px;
         }
 
         .blog-modal-content::-webkit-scrollbar-thumb {
-          background: #475569;
+          background: #cbd5e1;
           border-radius: 2px;
         }
 
         .blog-modal-content::-webkit-scrollbar-thumb:hover {
-          background: #64748b;
+          background: #94a3b8;
         }
 
         @media (max-width: 640px) {
