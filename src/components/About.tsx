@@ -53,6 +53,7 @@ const About = () => {
                 Outside of development, I’m always learning — exploring emerging technologies, contributing to creative initiatives, and sharing insights with the tech community. I’m driven by the belief that technology, when used thoughtfully, can create meaningful impact and lasting value.
               </p>
             </div>
+          </div>
         </div>
       </div>
     </section>
