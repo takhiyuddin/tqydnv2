@@ -42,9 +42,6 @@ const About = () => {
           
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="slide-in-left-on-scroll">
-              <h3 className="text-2xl font-medium text-slate-900 mb-6">
-                Hello, I am Taqiyuddin Afif
-              </h3>
               <p className="text-slate-600 leading-relaxed mb-6 text-lg">
                 I am a Web Developer committed to creating responsive, aesthetically pleasing, and efficient digital experiences. I believe that technology is a powerful tool for conveying ideas, solving problems, and building meaningful connections.
               </p>
