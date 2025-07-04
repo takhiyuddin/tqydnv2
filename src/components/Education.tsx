@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { BookOpen, Calendar } from 'lucide-react';
+import { useRef } from 'react';
+import { BookOpen, Calendar, Award, GraduationCap } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
 
 import LogoAmikom from '../assets/logo-amikom.svg';
 import LogoSMAN1Teras from '../assets/logo-sman1teras.svg';
@@ -18,35 +19,35 @@ interface EducationItem {
 
 const Education = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const elements = entry.target.querySelectorAll('.fade-in-on-scroll, .scale-in-on-scroll');
-            elements.forEach((el: Element, index: number) => {
-              setTimeout(() => {
-                el.classList.add('visible');
-              }, index * 150);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
     }
+  };
 
-    return () => observer.disconnect();
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
   const educationHistory: EducationItem[] = [
     {
       institution: 'Universitas Amikom Yogyakarta',
-      logo: <img src={LogoAmikom} alt="Logo Amikom" className="w-8 h-8" />,
+      logo: <img src={LogoAmikom} alt="Logo Amikom" className="w-10 h-10" />,
       degree: 'Bachelor of Information Systems',
       faculty: 'Faculty of Computer Science',
       period: 'Currently Pursuing',
@@ -57,7 +58,7 @@ const Education = () => {
     },
     {
       institution: 'SMA Negeri 1 Teras',
-      logo: <img src={LogoSMAN1Teras} alt="Logo SMAN 1 Teras" className="w-8 h-8" />,
+      logo: <img src={LogoSMAN1Teras} alt="Logo SMAN 1 Teras" className="w-10 h-10" />,
       degree: 'Senior High School',
       faculty: 'IPS Informatics',
       period: '2022 - 2025',
@@ -77,7 +78,7 @@ const Education = () => {
     },
     {
       institution: 'MTSS Islam Ngruki',
-      logo: <img src={LogoNgruki} alt="Logo MTSS Ngruki" className="w-8 h-8" />,
+      logo: <img src={LogoNgruki} alt="Logo MTSS Ngruki" className="w-10 h-10" />,
       degree: 'Islamic Junior High School',
       faculty: 'General Education',
       period: '2019 - 2022',
@@ -89,91 +90,142 @@ const Education = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="education" className="py-24 bg-white relative">
-      <div className="section-divider absolute top-0 left-0 right-0"></div>
+    <section ref={sectionRef} id="education" className="py-24 lg:py-32 bg-white relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, -90, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-1/4 left-0 w-80 h-80 bg-gradient-to-r from-purple-100/30 to-blue-100/30 rounded-full blur-3xl"
+        />
+      </div>
 
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-              Education
-            </h2>
-          </div>
+      <div className="container mx-auto px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="text-center mb-16 lg:mb-20"
+          >
+            <motion.div variants={itemVariants}>
+              <span className="inline-block px-4 py-2 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200/50 rounded-full text-sm font-medium text-purple-700 mb-6">
+                Academic Journey
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+                My <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Education</span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Building knowledge through continuous learning and academic excellence
+              </p>
+            </motion.div>
+          </motion.div>
 
-          <div className="space-y-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="space-y-8"
+          >
             {educationHistory.map((education, index: number) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white border border-slate-200 rounded-lg p-8 card-hover scale-in-on-scroll"
-                style={{ animationDelay: `${index * 0.15}s` }}
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="group bg-white p-8 lg:p-10 rounded-3xl border border-gray-200/50 shadow-lg shadow-gray-900/5 hover:shadow-2xl hover:shadow-gray-900/10 transition-all duration-500"
               >
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-                  <div className="flex items-center gap-4 mb-4 lg:mb-0">
-                    <div className="p-3 bg-slate-100 rounded-lg">{education.logo}</div>
-                    <h3 className="text-2xl font-medium text-slate-900">{education.institution}</h3>
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+                  <div className="flex items-center gap-6 mb-6 lg:mb-0">
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                      className="p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl border border-gray-200/50 group-hover:from-purple-50 group-hover:to-blue-50 group-hover:border-purple-200/50 transition-all duration-500"
+                    >
+                      {education.logo}
+                    </motion.div>
+                    <div>
+                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">
+                        {education.institution}
+                      </h3>
+                      <p className="text-gray-600 mt-1">{education.faculty}</p>
+                    </div>
                   </div>
-                  <span
-                    className={`px-4 py-2 rounded-full text-sm font-medium ${
+                  
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    className={`inline-block px-6 py-3 rounded-2xl text-sm font-bold shadow-lg ${
                       education.status === 'Current'
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'bg-green-100 text-green-700'
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
+                        : 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
                     }`}
                   >
                     {education.status}
-                  </span>
+                  </motion.span>
                 </div>
 
-                <div className="flex flex-col gap-4 mb-6">
-                  <div className="flex items-center gap-3">
-                    <BookOpen className="text-slate-400" size={16} />
-                    <span className="text-slate-600 font-medium">{education.degree}</span>
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  <div className="flex items-center gap-4 p-4 bg-gray-50/50 rounded-2xl group-hover:bg-purple-50/50 transition-colors duration-300">
+                    <div className="p-3 bg-white rounded-xl shadow-sm">
+                      <BookOpen className="text-purple-600" size={20} />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">{education.degree}</p>
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <Calendar className="text-slate-400" size={16} />
-                    <span className="text-slate-500">{education.period}</span>
+                  <div className="flex items-center gap-4 p-4 bg-gray-50/50 rounded-2xl group-hover:bg-blue-50/50 transition-colors duration-300">
+                    <div className="p-3 bg-white rounded-xl shadow-sm">
+                      <Calendar className="text-blue-600" size={20} />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">{education.period}</p>
+                    </div>
                   </div>
-
-                  <div className="text-slate-500">{education.faculty}</div>
                 </div>
 
-                <p className="text-slate-600 leading-relaxed mb-4">{education.description}</p>
+                <p className="text-gray-600 leading-relaxed text-lg mb-8">{education.description}</p>
 
                 {education.achievements.length > 0 && (
-                  <div>
-                    <div className="flex items-center gap-2 text-blue-600 font-medium mb-2">
-                      <span>Achievements</span>
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    className="border-t border-gray-200/50 pt-8"
+                  >
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-3 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl text-white">
+                        <Award size={20} />
+                      </div>
+                      <h4 className="text-xl font-bold text-gray-900">Achievements & Activities</h4>
                     </div>
-                    <ul className="list-disc list-inside text-slate-600 dropdown-animation">
+                    <div className="grid gap-3">
                       {education.achievements.map((achievement, idx: number) => (
-                        <li key={idx} className="mb-2">{achievement}</li>
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.1, duration: 0.5 }}
+                          className="flex items-start gap-4 p-4 bg-gradient-to-r from-amber-50/50 to-orange-50/50 rounded-2xl border border-amber-200/30 hover:border-amber-300/50 transition-all duration-300"
+                        >
+                          <div className="w-2 h-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-3 flex-shrink-0"></div>
+                          <span className="text-gray-700 leading-relaxed">{achievement}</span>
+                        </motion.div>
                       ))}
-                    </ul>
-                  </div>
+                    </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
-
-      <style>{`
-        .dropdown-animation {
-          animation: slideIn 0.3s ease-in-out;
-          transform-origin: top;
-        }
-
-        @keyframes slideIn {
-          0% {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </section>
   );
 };
