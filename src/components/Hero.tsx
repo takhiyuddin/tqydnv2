@@ -51,32 +51,32 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center bg-white relative"
+      className="min-h-screen flex items-center justify-center bg-black relative"
     >
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto pt-20">
           <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-light text-slate-900 mb-6 tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-light text-white mb-6 tracking-tight">
               <span className="font-medium">
                 {displayedText}
                 {showCursor && (
-                  <span className="animate-pulse border-r-2 border-slate-900 ml-1"></span>
+                  <span className="animate-pulse border-r-2 border-white ml-1"></span>
                 )}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 mb-12 font-light animate-fade-in-delayed">
+            <p className="text-xl md:text-2xl text-gray-400 mb-12 font-light animate-fade-in-delayed">
               Web Developer
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in-delayed-2">
-            <button className="btn-primary text-white px-8 py-3 rounded-lg font-medium flex items-center gap-2 text-sm">
+            <button className="btn-primary text-black px-8 py-3 rounded-lg font-medium flex items-center gap-2 text-sm">
               <Download size={16} />
               Download Resume
             </button>
             <button
               onClick={scrollToContact}
-              className="border border-slate-300 text-slate-700 px-8 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200 flex items-center gap-2 text-sm"
+              className="border border-gray-600 text-gray-300 px-8 py-3 rounded-lg font-medium hover:border-gray-400 hover:bg-gray-900 transition-all duration-200 flex items-center gap-2 text-sm"
             >
               <Mail size={16} />
               Get in Touch
@@ -85,7 +85,7 @@ const Hero = () => {
 
           <button
             onClick={scrollToAbout}
-            className="text-slate-400 hover:text-slate-600 transition-colors duration-200 animate-bounce"
+            className="text-gray-600 hover:text-gray-400 transition-colors duration-200 animate-bounce"
           >
             <ChevronDown size={24} />
           </button>

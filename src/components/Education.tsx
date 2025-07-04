@@ -89,13 +89,13 @@ const Education = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="education" className="py-24 bg-white relative">
+    <section ref={sectionRef} id="education" className="py-24 bg-black relative">
       <div className="section-divider absolute top-0 left-0 right-0"></div>
 
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
               Education
             </h2>
           </div>
@@ -104,19 +104,19 @@ const Education = () => {
             {educationHistory.map((education, index: number) => (
               <div
                 key={index}
-                className="bg-white border border-slate-200 rounded-lg p-8 card-hover scale-in-on-scroll"
+                className="bg-gray-900 border border-gray-800 rounded-lg p-8 card-hover scale-in-on-scroll"
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
                   <div className="flex items-center gap-4 mb-4 lg:mb-0">
-                    <div className="p-3 bg-slate-100 rounded-lg">{education.logo}</div>
-                    <h3 className="text-2xl font-medium text-slate-900">{education.institution}</h3>
+                    <div className="p-3 bg-gray-800 rounded-lg">{education.logo}</div>
+                    <h3 className="text-2xl font-medium text-white">{education.institution}</h3>
                   </div>
                   <span
                     className={`px-4 py-2 rounded-full text-sm font-medium ${
                       education.status === 'Current'
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'bg-green-100 text-green-700'
+                        ? 'bg-blue-900 text-blue-300'
+                        : 'bg-green-900 text-green-300'
                     }`}
                   >
                     {education.status}
@@ -125,26 +125,26 @@ const Education = () => {
 
                 <div className="flex flex-col gap-4 mb-6">
                   <div className="flex items-center gap-3">
-                    <BookOpen className="text-slate-400" size={16} />
-                    <span className="text-slate-600 font-medium">{education.degree}</span>
+                    <BookOpen className="text-gray-600" size={16} />
+                    <span className="text-gray-400 font-medium">{education.degree}</span>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Calendar className="text-slate-400" size={16} />
-                    <span className="text-slate-500">{education.period}</span>
+                    <Calendar className="text-gray-600" size={16} />
+                    <span className="text-gray-500">{education.period}</span>
                   </div>
 
-                  <div className="text-slate-500">{education.faculty}</div>
+                  <div className="text-gray-500">{education.faculty}</div>
                 </div>
 
-                <p className="text-slate-600 leading-relaxed mb-4">{education.description}</p>
+                <p className="text-gray-400 leading-relaxed mb-4">{education.description}</p>
 
                 {education.achievements.length > 0 && (
                   <div>
-                    <div className="flex items-center gap-2 text-blue-600 font-medium mb-2">
+                    <div className="flex items-center gap-2 text-blue-400 font-medium mb-2">
                       <span>Achievements</span>
                     </div>
-                    <ul className="list-disc list-inside text-slate-600 dropdown-animation">
+                    <ul className="list-disc list-inside text-gray-400 dropdown-animation">
                       {education.achievements.map((achievement, idx: number) => (
                         <li key={idx} className="mb-2">{achievement}</li>
                       ))}

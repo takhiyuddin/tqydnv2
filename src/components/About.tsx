@@ -29,51 +29,51 @@ const About = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 bg-slate-50 relative">
+    <section ref={sectionRef} id="about" className="py-24 bg-gray-900 relative">
       <div className="section-divider absolute top-0 left-0 right-0"></div>
       
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
               About Me
             </h2>
           </div>
           
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="slide-in-left-on-scroll">
-              <h3 className="text-2xl font-medium text-slate-900 mb-6">
+              <h3 className="text-2xl font-medium text-white mb-6">
                 Hello, I am Taqiyuddin Afif
               </h3>
-              <p className="text-slate-600 leading-relaxed mb-6 text-lg">
+              <p className="text-gray-400 leading-relaxed mb-6 text-lg">
                 I am a Web Developer committed to creating responsive, aesthetically pleasing, and efficient digital experiences. I believe that technology is a powerful tool for conveying ideas, solving problems, and building meaningful connections.
               </p>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                Outside of development, I’m always learning — exploring emerging technologies, contributing to creative initiatives, and sharing insights with the tech community. I’m driven by the belief that technology, when used thoughtfully, can create meaningful impact and lasting value.
+              <p className="text-gray-400 leading-relaxed text-lg">
+                Outside of development, I'm always learning — exploring emerging technologies, contributing to creative initiatives, and sharing insights with the tech community. I'm driven by the belief that technology, when used thoughtfully, can create meaningful impact and lasting value.
               </p>
             </div>
 
             <div className="space-y-6 slide-in-right-on-scroll">
-              <div className="bg-white p-6 rounded-lg border border-slate-200 card-hover">
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 card-hover">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-100 rounded-lg">
-                    <MapPin className="text-slate-600" size={20} />
+                  <div className="p-3 bg-gray-700 rounded-lg">
+                    <MapPin className="text-gray-400" size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium text-slate-900 mb-1">Location</h4>
-                    <p className="text-slate-600">Boyolali, Indonesia</p>
+                    <h4 className="font-medium text-white mb-1">Location</h4>
+                    <p className="text-gray-400">Boyolali, Indonesia</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg border border-slate-200 card-hover">
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 card-hover">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-slate-100 rounded-lg">
-                    <Mail className="text-slate-600" size={20} />
+                  <div className="p-3 bg-gray-700 rounded-lg">
+                    <Mail className="text-gray-400" size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium text-slate-900 mb-1">Email</h4>
-                    <p className="text-slate-600">afiftqydns@gmail.com</p>
+                    <h4 className="font-medium text-white mb-1">Email</h4>
+                    <p className="text-gray-400">afiftqydns@gmail.com</p>
                   </div>
                 </div>
               </div>
