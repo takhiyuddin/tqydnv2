@@ -25,13 +25,13 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black border-t border-gray-800">
+    <footer className="bg-white border-t border-slate-200">
       <div className="container mx-auto px-6 py-16">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             {/* Brand Section */}
             <div className="space-y-6">
-              <h3 className="text-2xl font-medium text-white">
+              <h3 className="text-2xl font-medium text-slate-900">
                 Taqiyuddin
               </h3>
               <div className="flex space-x-3">
@@ -40,7 +40,7 @@ const Footer = () => {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="p-3 bg-gray-800 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-200"
+                    className="p-3 bg-slate-100 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition-all duration-200"
                   >
                     <social.icon size={18} />
                   </a>
@@ -50,13 +50,13 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div className="space-y-6">
-              <h4 className="font-medium text-white">Quick Links</h4>
+              <h4 className="font-medium text-slate-900">Quick Links</h4>
               <div className="grid grid-cols-2 gap-3">
                 {quickLinks.map((link, index) => (
                   <button
                     key={index}
                     onClick={() => scrollToSection(link.href)}
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-left"
+                    className="text-slate-600 hover:text-slate-900 transition-colors duration-200 text-left"
                   >
                     {link.label}
                   </button>
@@ -66,9 +66,9 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="space-y-6">
-              <h4 className="font-medium text-white">Get In Touch</h4>
+              <h4 className="font-medium text-slate-900">Get In Touch</h4>
               <div className="space-y-3">
-                <div className="flex items-center gap-3 text-gray-400">
+                <div className="flex items-center gap-3 text-slate-600">
                   <Mail size={16} />
                   <span>afiftqydns@gmail.com</span>
                 </div>
@@ -76,8 +76,8 @@ const Footer = () => {
             </div>
           </div>
           
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-gray-500">
+          <div className="border-t border-slate-200 pt-8 text-center">
+            <p className="text-slate-500">
               © {currentYear} Taqiyuddin Afif
             </p>
           </div>

@@ -52,14 +52,14 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
+        isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/50' : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <button
             onClick={() => scrollToSection('#hero')}
-            className="text-xl font-semibold text-white hover:text-gray-300 transition-colors duration-200"
+            className="text-xl font-semibold text-slate-900 hover:text-slate-600 transition-colors duration-200"
           >
             Taqiyuddin
           </button>
@@ -72,8 +72,8 @@ const Header = () => {
                 onClick={() => scrollToSection(item.href)}
                 className={`flex items-center gap-2 text-sm font-medium transition-colors duration-200 ${
                   activeSection === item.href.substring(1)
-                    ? 'text-white'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'text-slate-900'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 {item.icon}
@@ -85,7 +85,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors duration-200"
+            className="lg:hidden p-2 text-slate-600 hover:text-slate-900 transition-colors duration-200"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -99,7 +99,7 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="lg:hidden mt-4 pb-4 bg-gray-900/90 backdrop-blur-md rounded-lg border border-gray-800 shadow-md"
+              className="lg:hidden mt-4 pb-4 bg-white/90 backdrop-blur-md rounded-lg border border-slate-200/50 shadow-md"
             >
               {navItems.map((item) => (
                 <button
@@ -107,8 +107,8 @@ const Header = () => {
                   onClick={() => scrollToSection(item.href)}
                   className={`flex items-center gap-2 w-full text-left px-4 py-3 text-sm font-medium transition-colors duration-200 ${
                     activeSection === item.href.substring(1)
-                      ? 'text-white bg-gray-800'
-                      : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                      ? 'text-slate-900 bg-slate-50'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
                 >
                   {item.icon}

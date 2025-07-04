@@ -79,13 +79,13 @@ const Achievements = () => {
   };
 
   return (
-    <section ref={sectionRef} id="achievements" className="py-24 bg-gray-900 relative">
+    <section ref={sectionRef} id="achievements" className="py-24 bg-slate-50 relative">
       <div className="section-divider absolute top-0 left-0 right-0"></div>
 
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 fade-in-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               Achievements
             </h2>
           </div>
@@ -94,45 +94,45 @@ const Achievements = () => {
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="bg-gray-800 border border-gray-700 rounded-lg p-8 card-hover scale-in-on-scroll"
+                className="bg-white border border-slate-200 rounded-lg p-8 card-hover scale-in-on-scroll"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <div className="flex items-start gap-6 mb-6">
-                  <div className="p-4 bg-gray-700 rounded-lg">
-                    <achievement.icon className="text-gray-400" size={28} />
+                  <div className="p-4 bg-slate-100 rounded-lg">
+                    <achievement.icon className="text-slate-600" size={28} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-medium text-white mb-3">
+                    <h3 className="text-2xl font-medium text-slate-900 mb-3">
                       {achievement.title}
                     </h3>
                     <div className="flex items-center gap-3 mb-2">
-                      <Film className="text-gray-600" size={16} />
-                      <span className="text-gray-400 font-medium">{achievement.event}</span>
+                      <Film className="text-slate-400" size={16} />
+                      <span className="text-slate-600 font-medium">{achievement.event}</span>
                     </div>
                     <div className="flex items-center gap-3 mb-2">
-                      <Calendar className="text-gray-600" size={16} />
-                      <span className="text-gray-500">{achievement.year}</span>
+                      <Calendar className="text-slate-400" size={16} />
+                      <span className="text-slate-500">{achievement.year}</span>
                     </div>
-                    <p className="text-gray-500 mb-4">{achievement.organization}</p>
+                    <p className="text-slate-500 mb-4">{achievement.organization}</p>
                   </div>
                 </div>
 
-                <p className="text-gray-400 leading-relaxed mb-6">{achievement.description}</p>
+                <p className="text-slate-600 leading-relaxed mb-6">{achievement.description}</p>
 
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-gray-700 rounded-lg">
-                    <Edit3 className="text-gray-400" size={16} />
+                  <div className="p-2 bg-slate-100 rounded-lg">
+                    <Edit3 className="text-slate-600" size={16} />
                   </div>
-                  <span className="text-gray-400 font-medium">Role: {achievement.role}</span>
+                  <span className="text-slate-600 font-medium">Role: {achievement.role}</span>
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="font-medium text-white mb-4">Key Contributions:</h4>
+                  <h4 className="font-medium text-slate-900 mb-4">Key Contributions:</h4>
                   <ul className="space-y-2">
                     {achievement.details.map((detail, detailIndex) => (
                       <li key={detailIndex} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 bg-gray-600 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-400 leading-relaxed text-sm">{detail}</span>
+                        <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-slate-600 leading-relaxed text-sm">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -140,7 +140,7 @@ const Achievements = () => {
 
                 <button
                   onClick={() => openModal(achievement.image)}
-                  className="w-full border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-medium hover:border-gray-400 hover:bg-gray-800 transition-all duration-200 flex items-center justify-center gap-2 text-sm"
+                  className="w-full border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-slate-400 hover:bg-slate-50 transition-all duration-200 flex items-center justify-center gap-2 text-sm"
                 >
                   <span>View Credential</span>
                   <ExternalLink size={16} />
@@ -154,13 +154,13 @@ const Achievements = () => {
       {/* Modal for JPG preview */}
       {modalOpen && selectedImage && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center px-4 transition-opacity duration-300">
-          <div className="bg-gray-900 rounded-xl max-w-4xl w-full relative shadow-xl overflow-hidden transform scale-100 opacity-100 transition-all duration-300 ease-out">
+          <div className="bg-white rounded-xl max-w-4xl w-full relative shadow-xl overflow-hidden transform scale-100 opacity-100 transition-all duration-300 ease-out">
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 border border-gray-600 rounded-full p-2 
-                         bg-gray-800/80 text-gray-300 
-                         hover:bg-gray-700 shadow-lg backdrop-blur 
-                         focus:outline-none focus:ring-2 focus:ring-gray-600 transition-all"
+              className="absolute top-4 right-4 border border-slate-400 rounded-full p-2 
+                         bg-white/80 text-slate-800 
+                         hover:bg-slate-100 shadow-lg backdrop-blur 
+                         focus:outline-none focus:ring-2 focus:ring-slate-400 transition-all"
               aria-label="Close modal"
             >
               <X size={20} />
