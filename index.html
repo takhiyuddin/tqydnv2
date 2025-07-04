@@ -4,145 +4,44 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Taqiyuddin Afif - Creative Web Developer</title>
-    <meta name="description" content="Professional web developer portfolio of Taqiyuddin Afif. Specializing in modern frontend development, UI/UX design, video editing, and performance-optimized web applications.">
-    <meta name="keywords" content="web developer, frontend developer, React developer, video editor, UI/UX designer, portfolio">
-    <meta name="author" content="Taqiyuddin Afif">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Taqiyuddin Afif - Creative Web Developer">
-    <meta property="og:description" content="Professional web developer specializing in modern frontend development, UI/UX design, and video editing.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://taqiyuddin-afif.com">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Taqiyuddin Afif - Creative Web Developer">
-    <meta name="twitter:description" content="Professional web developer specializing in modern frontend development, UI/UX design, and video editing.">
-    
-    <!-- Preconnect for Performance -->
+    <title></title>
+    <meta name="description" content="Professional web developer portfolio of Taqiyuddin Afif. Specializing in modern frontend development, UI/UX, and performance-optimized web applications.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Google Fonts - Inter with Extended Weights -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      /* CSS Variables for Consistent Design System */
-      :root {
-        --color-primary: #3b82f6;
-        --color-primary-dark: #1d4ed8;
-        --color-secondary: #8b5cf6;
-        --color-accent: #06b6d4;
-        --color-success: #10b981;
-        --color-warning: #f59e0b;
-        --color-error: #ef4444;
-        
-        --color-gray-50: #f8fafc;
-        --color-gray-100: #f1f5f9;
-        --color-gray-200: #e2e8f0;
-        --color-gray-300: #cbd5e1;
-        --color-gray-400: #94a3b8;
-        --color-gray-500: #64748b;
-        --color-gray-600: #475569;
-        --color-gray-700: #334155;
-        --color-gray-800: #1e293b;
-        --color-gray-900: #0f172a;
-        
-        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-        
-        --border-radius-sm: 0.375rem;
-        --border-radius-md: 0.5rem;
-        --border-radius-lg: 0.75rem;
-        --border-radius-xl: 1rem;
-        --border-radius-2xl: 1.5rem;
-        --border-radius-3xl: 2rem;
-        
-        --spacing-xs: 0.25rem;
-        --spacing-sm: 0.5rem;
-        --spacing-md: 1rem;
-        --spacing-lg: 1.5rem;
-        --spacing-xl: 2rem;
-        --spacing-2xl: 3rem;
-        --spacing-3xl: 4rem;
-      }
-
-      /* Global Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       html {
         scroll-behavior: smooth;
-        font-size: 16px;
-        line-height: 1.6;
       }
 
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-        font-weight: 400;
-        color: var(--color-gray-900);
-        background-color: #ffffff;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
       }
 
-      /* Enhanced Scrollbar Styling */
-      ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      ::-webkit-scrollbar-track {
-        background: var(--color-gray-50);
-        border-radius: var(--border-radius-sm);
+      @keyframes scale-in {
+        from {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
 
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-        border-radius: var(--border-radius-sm);
-        transition: all 0.3s ease;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary));
-        transform: scale(1.1);
-      }
-
-      /* Firefox Scrollbar */
-      html {
-        scrollbar-width: thin;
-        scrollbar-color: var(--color-primary) var(--color-gray-50);
-      }
-
-      /* Enhanced Focus Styles for Accessibility */
-      *:focus {
-        outline: 2px solid var(--color-primary);
-        outline-offset: 2px;
-        border-radius: var(--border-radius-sm);
-      }
-
-      /* Selection Styling */
-      ::selection {
-        background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-        color: white;
-      }
-
-      ::-moz-selection {
-        background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-        color: white;
-      }
-
-      /* Loading Animation */
-      @keyframes fadeInUp {
+      @keyframes slide-up {
         from {
           opacity: 0;
           transform: translateY(30px);
@@ -153,237 +52,154 @@
         }
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      .animate-fade-in {
+        animation: fade-in 0.6s ease-out;
       }
 
-      @keyframes scaleIn {
-        from {
-          opacity: 0;
-          transform: scale(0.95);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
+      .animate-scale-in {
+        animation: scale-in 0.5s ease-out;
       }
 
-      @keyframes slideInLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
+      .animate-slide-up {
+        animation: slide-up 0.6s ease-out;
       }
 
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
+      .animate-fade-in-delayed {
+        animation: fade-in 0.6s ease-out 0.2s both;
       }
 
-      @keyframes pulse {
-        0%, 100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.5;
-        }
+      .animate-fade-in-delayed-2 {
+        animation: fade-in 0.6s ease-out 0.4s both;
       }
 
-      @keyframes bounce {
-        0%, 20%, 53%, 80%, 100% {
-          transform: translate3d(0, 0, 0);
-        }
-        40%, 43% {
-          transform: translate3d(0, -30px, 0);
-        }
-        70% {
-          transform: translate3d(0, -15px, 0);
-        }
-        90% {
-          transform: translate3d(0, -4px, 0);
-        }
+      .animate-fade-in-delayed-3 {
+        animation: fade-in 0.6s ease-out 0.6s both;
       }
 
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
+      .fade-in-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
       }
 
-      /* Utility Animation Classes */
-      .animate-fadeIn {
-        animation: fadeIn 0.6s ease-out;
+      .fade-in-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
-      .animate-fadeInUp {
-        animation: fadeInUp 0.8s ease-out;
+      .scale-in-on-scroll {
+        opacity: 0;
+        transform: scale(0.98);
+        transition: all 0.5s ease-out;
       }
 
-      .animate-scaleIn {
-        animation: scaleIn 0.5s ease-out;
+      .scale-in-on-scroll.visible {
+        opacity: 1;
+        transform: scale(1);
       }
 
-      .animate-slideInLeft {
-        animation: slideInLeft 0.6s ease-out;
+      .slide-in-left-on-scroll {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.6s ease-out;
       }
 
-      .animate-slideInRight {
-        animation: slideInRight 0.6s ease-out;
+      .slide-in-left-on-scroll.visible {
+        opacity: 1;
+        transform: translateX(0);
       }
 
-      .animate-pulse {
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      .slide-in-right-on-scroll {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.6s ease-out;
       }
 
-      .animate-bounce {
-        animation: bounce 1s infinite;
+      .slide-in-right-on-scroll.visible {
+        opacity: 1;
+        transform: translateX(0);
       }
 
-      .animate-spin {
-        animation: spin 1s linear infinite;
+      ::-webkit-scrollbar {
+        width: 4px;
       }
 
-      /* Delayed Animation Classes */
-      .animate-delay-100 {
-        animation-delay: 0.1s;
+      ::-webkit-scrollbar-track {
+        background: #f8fafc;
       }
 
-      .animate-delay-200 {
-        animation-delay: 0.2s;
+      ::-webkit-scrollbar-thumb {
+        background: #64748b;
+        border-radius: 2px;
       }
 
-      .animate-delay-300 {
-        animation-delay: 0.3s;
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569;
       }
 
-      .animate-delay-500 {
-        animation-delay: 0.5s;
+      .nav-item {
+        position: relative;
+        transition: all 0.2s ease-out;
       }
 
-      /* Performance Optimizations */
-      .will-change-transform {
-        will-change: transform;
+      .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 1px;
+        background: #64748b;
+        transition: all 0.2s ease-out;
+        transform: translateX(-50%);
       }
 
-      .will-change-opacity {
-        will-change: opacity;
+      .nav-item:hover::after,
+      .nav-item.active::after {
+        width: 100%;
       }
 
-      .gpu-accelerated {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-        perspective: 1000px;
+      .card-hover {
+        transition: all 0.3s ease-out;
       }
 
-      /* Reduced Motion Support */
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
       }
 
-      /* High Contrast Mode Support */
-      @media (prefers-contrast: high) {
-        :root {
-          --color-gray-500: #000000;
-          --color-gray-600: #000000;
-          --color-gray-700: #000000;
-          --color-gray-800: #000000;
-          --color-gray-900: #000000;
-        }
+      .btn-primary {
+        background: #1e293b;
+        transition: all 0.2s ease-out;
       }
 
-      /* Dark Mode Preparation */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --color-gray-50: #0f172a;
-          --color-gray-100: #1e293b;
-          --color-gray-200: #334155;
-          --color-gray-300: #475569;
-          --color-gray-400: #64748b;
-          --color-gray-500: #94a3b8;
-          --color-gray-600: #cbd5e1;
-          --color-gray-700: #e2e8f0;
-          --color-gray-800: #f1f5f9;
-          --color-gray-900: #f8fafc;
-        }
+      .btn-primary:hover {
+        background: #0f172a;
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px -8px rgba(30, 41, 59, 0.3);
       }
 
-      /* Print Styles */
-      @media print {
-        * {
-          background: transparent !important;
-          color: black !important;
-          box-shadow: none !important;
-          text-shadow: none !important;
-        }
-        
-        a,
-        a:visited {
-          text-decoration: underline;
-        }
-        
-        a[href]:after {
-          content: " (" attr(href) ")";
-        }
-        
-        .no-print {
-          display: none !important;
-        }
+      .section-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
       }
     </style>
+    <script>
+      const titleText = "Taqiyuddin Afif - Web Developer";
+      let index = 0;
+      let direction = 1;
 
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Taqiyuddin Afif",
-      "jobTitle": "Web Developer",
-      "description": "Creative Web Developer specializing in modern frontend development, UI/UX design, and video editing",
-      "url": "https://taqiyuddin-afif.com",
-      "sameAs": [
-        "https://www.instagram.com/tqydns/",
-        "https://github.com/taqiyuddin-afif",
-        "https://linkedin.com/in/taqiyuddin-afif"
-      ],
-      "knowsAbout": [
-        "Web Development",
-        "React.js",
-        "TypeScript",
-        "Video Editing",
-        "UI/UX Design",
-        "Frontend Development"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Boyolali",
-        "addressCountry": "Indonesia"
-      }
-    }
+      setInterval(() => {
+        document.title = titleText.slice(0, index);
+        index += direction;
+
+        if (index > titleText.length) {
+          direction = -1;
+          setTimeout(() => {}, 500);
+        } else if (index < 0) {
+          direction = 1;
+        }
+      }, 150);
     </script>
   </head>
   <body>
